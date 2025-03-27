@@ -131,7 +131,7 @@ export const Projects = () => {
                 An annual event at Universitas Gadjah Mada aimed at introducing various student activity units (UKM) and communities to new students. The event provided information about organizations, showcased performances, and encouraged student engagement in extracurricular activities to develop skills and networks beyond academics.
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
-                {["Socket.IO", "Express", "React", "Redis"].map((tech, key) => (
+                {["Next.js", "TailwindCSS", ""].map((tech, key) => (
                   <span
                     key={key}
                     className="
