@@ -81,10 +81,10 @@ export const data = {
             image: null,
         },
         {
-            title: "Denteksi / Senyumin",
+            title: "Landing Page for PT Citra Numusi Birawa (CINURAWA)",
             description:
-                "A web-based application designed for early detection of dental caries in children. Utilizes AI-powered image analysis to assess dental conditions and determine whether further examination is needed. The platform aims to assist parents in monitoring children's oral health more effectively.",
-            tech: ["Laravel 10", "Bootstrap 5", "Cropper.js", "Machine Learning"],
+                "Developed a web-based Content Management System (CMS) to simplify the management and publication of website content. The system provides an intuitive admin interface for managing pages, articles, banners, and other digital content, enabling administrators to update information efficiently without modifying the source code.",
+            tech: ["Laravel 10", "Bootstrap 5", "Filament Admin Panel", "MySQL", "PHP", "JavaScript", "HTML", "CSS"],
             github: "https://github.com/Haikal-Adityo/Cinurawa",
             demo: null,
             image: null,
@@ -110,13 +110,13 @@ export const data = {
     },
 
     certifications: [
-        { name: "Junior Web Developer", issuer: "BNSP", year: "2025" },
-        { name: "Associate Data Engineer", issuer: "BNSP", year: "2025" },
-        { name: "ReactJS Mastery For Green Tech Front-End Engineers", issuer: "Altera Academy", year: "2024" },
-        { name: "Learn to Create a Web Front-End for Beginners", issuer: "Dicoding", year: "2024" },
-        { name: "Learn JavaScript Programming", issuer: "Dicoding", year: "2024" },
-        { name: "Learn Web Programming Basics", issuer: "Dicoding", year: "2024" },
-        { name: "Learn the Fundamentals of Front-End Development", issuer: "Dicoding", year: "2024" },
+        { name: "Junior Web Developer", issuer: "BNSP", year: "2025", pdf: "/certificates/sertifikat-JWD-BNSP.pdf" },
+        { name: "Associate Data Engineer", issuer: "BNSP", year: "2025", pdf: "/certificates/sertifikat-ADE-BNSP.pdf" },
+        { name: "ReactJS Mastery For Green Tech Front-End Engineers", issuer: "Altera Academy", year: "2024", pdf: "/certificates/alterra.pdf" },
+        { name: "Learn to Create a Web Front-End for Beginners", issuer: "Dicoding", year: "2024", pdf: "/certificates/Belajar-Membuat-Front-End-Web-untuk-Pemula.pdf" },
+        { name: "Learn JavaScript Programming", issuer: "Dicoding", year: "2024", pdf: "/certificates/Belajar-Dasar-Pemrograman-JavaScript.pdf" },
+        { name: "Learn Web Programming Basics", issuer: "Dicoding", year: "2024", pdf: "/certificates/Belajar-Dasar-Pemrograman-Web.pdf" },
+        { name: "Learn the Fundamentals of Front-End Development", issuer: "Dicoding", year: "2024", pdf: "/certificates/Belajar-Fundamental-FrontEnd-Web-Development.pdf" },
     ],
 
     achievements: [
