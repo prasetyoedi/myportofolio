@@ -122,13 +122,13 @@ export const data = {
     achievements: [
         {
             title: "Silver Medal Winner",
-            description: "Poster PKM-Entrepreneurship (Pinnas 37) by Kemendikbudristek",
+            description: "Poster PKM-Entrepreneurship (Pekan Ilmiah Mahasiswa Ke-37)",
             year: "2024",
             icon: "🥈",
         },
         {
             title: "Gold Medal Winner",
-            description: "Poster PKM-Entrepreneurship (Pinnas 36) by Kemendikbudristek",
+            description: "Poster PKM-Entrepreneurship (Pekan Ilmiah Mahasiswa Ke-36)",
             year: "2023",
             icon: "🥇",
         },

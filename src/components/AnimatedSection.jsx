@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from "react";
-import { cn } from "../utils/cn";
+import React, { useEffect, useRef } from 'react';
+import { cn } from '../utils/cn';
 
 export const AnimatedSection = ({ children, className, delay = 0 }) => {
     const ref = useRef(null);
@@ -9,10 +9,10 @@ export const AnimatedSection = ({ children, className, delay = 0 }) => {
             ([entry]) => {
                 if (entry.isIntersecting) {
                     const el = entry.target;
-                    el.classList.add("visible");
+                    el.classList.add('visible');
                 }
             },
-            { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+            { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
         );
 
         if (ref.current) observer.observe(ref.current);
@@ -22,7 +22,7 @@ export const AnimatedSection = ({ children, className, delay = 0 }) => {
     return (
         <div
             ref={ref}
-            className={cn("reveal", className)}
+            className={cn('reveal', className)}
             style={{ transitionDelay: `${delay}ms` }}
         >
             {children}

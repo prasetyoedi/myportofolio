@@ -1,8 +1,8 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { AnimatedSection } from "../AnimatedSection";
-import { data } from "../../data";
-import { Github, ExternalLink } from "lucide-react";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { AnimatedSection } from '../AnimatedSection';
+import { data } from '../../data';
+import { Github, ExternalLink } from 'lucide-react';
 
 export default function Projects() {
   return (
@@ -10,7 +10,7 @@ export default function Projects() {
       <div className="max-w-5xl mx-auto">
         <AnimatedSection>
           <h2 className="section-title gradient-text text-center">Featured Projects</h2>
-          <p className="text-center text-gray-400 mb-10 max-w-2xl mx-auto">
+          <p className="text-center text-[var(--text-muted)] mb-10 max-w-2xl mx-auto">
             Selected projects that showcase my full-stack development skills and passion for building impactful applications.
           </p>
         </AnimatedSection>
@@ -19,13 +19,11 @@ export default function Projects() {
           {data.projects.map((project, idx) => (
             <AnimatedSection key={idx} delay={idx * 100}>
               <div className="glass p-6 rounded-2xl card-hover h-full flex flex-col">
-                {/* Title & description */}
-                <h3 className="text-xl font-bold text-white">{project.title}</h3>
-                <p className="text-gray-400 text-sm leading-relaxed mt-2 flex-1">
+                <h3 className="text-xl font-bold text-[var(--text-white)]">{project.title}</h3>
+                <p className="text-[var(--text-muted)] text-sm leading-relaxed mt-2 flex-1">
                   {project.description}
                 </p>
 
-                {/* Tech tags */}
                 <div className="flex flex-wrap gap-1.5 mt-4">
                   {project.tech.map((t) => (
                     <span key={t} className="text-[10px] px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/10">
@@ -34,14 +32,13 @@ export default function Projects() {
                   ))}
                 </div>
 
-                {/* Links */}
-                <div className="flex items-center gap-4 mt-5 pt-4 border-t border-white/5">
+                <div className="flex items-center gap-4 mt-5 pt-4 border-t border-[var(--glass-border)]">
                   {project.github && (
                     <a
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-400 hover:text-white transition-colors flex items-center gap-1.5 text-sm"
+                      className="text-[var(--text-muted)] hover:text-[var(--text-white)] transition-colors flex items-center gap-1.5 text-sm"
                     >
                       <Github size={16} /> Code
                     </a>
@@ -51,13 +48,13 @@ export default function Projects() {
                       href={project.demo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-400 hover:text-white transition-colors flex items-center gap-1.5 text-sm"
+                      className="text-[var(--text-muted)] hover:text-[var(--text-white)] transition-colors flex items-center gap-1.5 text-sm"
                     >
                       <ExternalLink size={16} /> Live Demo
                     </a>
                   )}
                   {!project.github && !project.demo && (
-                    <span className="text-gray-500 text-sm">Private project</span>
+                    <span className="text-[var(--text-muted)] text-sm">Private project</span>
                   )}
                 </div>
               </div>

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
 export const LoadingScreen = ({ isLoaded }) => {
-  const [text, setText] = useState("");
-  const fullText = "Prasetyo Edi Pamungkas";
+  const [text, setText] = useState('');
+  const fullText = 'Prasetyo Edi Pamungkas';
 
   useEffect(() => {
     if (isLoaded) return;
@@ -18,9 +18,9 @@ export const LoadingScreen = ({ isLoaded }) => {
   }, [isLoaded]);
 
   return (
-    <div className={`loading-screen ${isLoaded ? "hidden" : ""}`}>
+    <div className={`loading-screen ${isLoaded ? 'hidden' : ''}`}>
       <div className="loading-text">
-        {text || "\u00A0"}
+        {text || '\u00A0'}
         <span className="loading-cursor">|</span>
       </div>
       <div className="loading-bar-track">

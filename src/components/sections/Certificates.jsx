@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Document, Page, pdfjs } from "react-pdf";
-import { AnimatedSection } from "../AnimatedSection";
-import { data } from "../../data";
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Document, Page, pdfjs } from 'react-pdf';
+import { AnimatedSection } from '../AnimatedSection';
+import { data } from '../../data';
 import {
     Award,
     X,
@@ -18,10 +18,10 @@ import {
     Printer,
     Maximize2,
     Minimize2,
-} from "lucide-react";
+} from 'lucide-react';
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-    "pdfjs-dist/build/pdf.worker.min.mjs",
+    'pdfjs-dist/build/pdf.worker.min.mjs',
     import.meta.url
 ).toString();
 
@@ -36,12 +36,12 @@ export default function Certificates() {
         setSelectedCert(cert);
         setZoomLevel(1.0);
         setPageNumber(1);
-        document.body.style.overflow = "hidden";
+        document.body.style.overflow = 'hidden';
     };
 
     const closeLightbox = () => {
         setSelectedCert(null);
-        document.body.style.overflow = "";
+        document.body.style.overflow = '';
         setNumPages(null);
         setPageNumber(1);
         setZoomLevel(1.0);
@@ -78,9 +78,9 @@ export default function Certificates() {
 
     const handleDownload = () => {
         if (selectedCert?.pdf) {
-            const link = document.createElement("a");
+            const link = document.createElement('a');
             link.href = selectedCert.pdf;
-            link.download = `${selectedCert.name.replace(/\s+/g, "_")}.pdf`;
+            link.download = `${selectedCert.name.replace(/\s+/g, '_')}.pdf`;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
@@ -89,7 +89,7 @@ export default function Certificates() {
 
     const handlePrint = () => {
         if (selectedCert?.pdf) {
-            window.open(selectedCert.pdf, "_blank")?.print();
+            window.open(selectedCert.pdf, '_blank')?.print();
         }
     };
 
@@ -110,7 +110,7 @@ export default function Certificates() {
 
     return (
         <>
-            <section id="certificates" className="py-24 px-5 border-y border-white/5 relative overflow-hidden">
+            <section id="certificates" className="py-24 px-5 border-y border-[var(--glass-border)] relative overflow-hidden">
                 <div className="absolute inset-0 pointer-events-none">
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-blue-500/5 blur-3xl" />
                 </div>
@@ -118,7 +118,7 @@ export default function Certificates() {
                 <div className="max-w-5xl mx-auto relative z-10">
                     <AnimatedSection>
                         <h2 className="section-title gradient-text text-center">Certifications</h2>
-                        <p className="text-center text-gray-400 mb-10 max-w-2xl mx-auto">
+                        <p className="text-center text-[var(--text-muted)] mb-10 max-w-2xl mx-auto">
                             Professional certifications that validate my skills and expertise.
                         </p>
                     </AnimatedSection>
@@ -127,22 +127,22 @@ export default function Certificates() {
                         {data.certifications.map((cert, idx) => (
                             <AnimatedSection key={idx} delay={idx * 80}>
                                 <div
-                                    className="glass rounded-2xl overflow-hidden border border-white/5 hover:border-blue-500/30 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_16px_48px_-12px_rgba(59,130,246,0.15)] cursor-pointer group"
+                                    className="glass rounded-2xl overflow-hidden border border-[var(--glass-border)] hover:border-blue-500/30 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_16px_48px_-12px_rgba(59,130,246,0.15)] cursor-pointer group"
                                     onClick={() => cert.pdf && openLightbox(cert)}
                                 >
-                                    <div className="relative aspect-[4/3] overflow-hidden bg-white/5 flex items-center justify-center">
+                                    <div className="relative aspect-[4/3] overflow-hidden bg-[var(--glass-bg)] flex items-center justify-center">
                                         {cert.pdf ? (
                                             <>
                                                 <Document
                                                     file={cert.pdf}
                                                     loading={
-                                                        <div className="flex flex-col items-center gap-2 text-gray-500">
+                                                        <div className="flex flex-col items-center gap-2 text-[var(--text-muted)]">
                                                             <Loader2 size={32} className="animate-spin text-blue-400" />
                                                             <span className="text-xs">Loading PDF...</span>
                                                         </div>
                                                     }
                                                     error={
-                                                        <div className="flex flex-col items-center gap-2 text-gray-500">
+                                                        <div className="flex flex-col items-center gap-2 text-[var(--text-muted)]">
                                                             <FileText size={32} className="text-red-400" />
                                                             <span className="text-xs">Failed to load</span>
                                                         </div>
@@ -170,7 +170,7 @@ export default function Certificates() {
                                                 </div>
                                             </>
                                         ) : (
-                                            <div className="flex flex-col items-center gap-2 text-gray-500">
+                                            <div className="flex flex-col items-center gap-2 text-[var(--text-muted)]">
                                                 <Award size={40} className="text-blue-400/30" />
                                                 <span className="text-xs">No PDF</span>
                                             </div>
@@ -178,16 +178,16 @@ export default function Certificates() {
                                     </div>
 
                                     <div className="p-5">
-                                        <h4 className="font-semibold text-white text-sm leading-tight line-clamp-2">
+                                        <h4 className="font-semibold text-[var(--text-white)] text-sm leading-tight line-clamp-2">
                                             {cert.name}
                                         </h4>
-                                        <p className="text-xs text-gray-400 mt-1">{cert.issuer}</p>
+                                        <p className="text-xs text-[var(--text-muted)] mt-1">{cert.issuer}</p>
                                         <div className="flex items-center justify-between mt-3">
                                             <span className="text-xs text-blue-400 font-medium px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20">
                                                 {cert.year}
                                             </span>
                                             {cert.pdf && (
-                                                <span className="text-xs text-gray-500 flex items-center gap-1">
+                                                <span className="text-xs text-[var(--text-muted)] flex items-center gap-1">
                                                     Click to view <ExternalLink size={12} />
                                                 </span>
                                             )}
@@ -200,7 +200,7 @@ export default function Certificates() {
                 </div>
             </section>
 
-            {/* ===== LIGHTBOX dengan TOOLBAR DI BAWAH (seperti browser) ===== */}
+            {/* ===== LIGHTBOX PDF ===== */}
             <AnimatePresence>
                 {selectedCert && (
                     <motion.div
@@ -208,37 +208,44 @@ export default function Certificates() {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         className="fixed inset-0 z-[999] flex items-center justify-center p-4"
-                        style={{ background: "rgba(0,0,0,0.85)", backdropFilter: "blur(20px)" }}
+                        style={{
+                            background: 'rgba(0,0,0,0.7)',
+                            backdropFilter: 'blur(20px)',
+                        }}
                         onClick={closeLightbox}
                     >
                         <motion.div
                             initial={{ scale: 0.8, opacity: 0, y: 30 }}
                             animate={{ scale: 1, opacity: 1, y: 0 }}
                             exit={{ scale: 0.8, opacity: 0, y: 30 }}
-                            transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                            className="relative max-w-4xl w-full max-h-[90vh] rounded-2xl overflow-hidden bg-[#0a0a0f] border border-white/10 flex flex-col"
+                            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+                            className="relative max-w-4xl w-full max-h-[90vh] rounded-2xl overflow-hidden flex flex-col"
+                            style={{
+                                background: 'var(--bg-body)',
+                                border: '1px solid var(--glass-border)',
+                            }}
                             onClick={(e) => e.stopPropagation()}
                         >
-                            {/* === HEADER: Judul + Close === */}
-                            <div className="flex-shrink-0 flex items-center justify-between p-3 glass border-b border-white/5">
+                            {/* Header */}
+                            <div className="flex-shrink-0 flex items-center justify-between p-3 glass border-b border-[var(--glass-border)]">
                                 <div className="flex items-center gap-3 min-w-0">
                                     <FileText size={18} className="text-blue-400 flex-shrink-0" />
-                                    <span className="text-sm font-medium text-white truncate">
+                                    <span className="text-sm font-medium text-[var(--text-white)] truncate">
                                         {selectedCert.name}
                                     </span>
-                                    <span className="text-xs text-gray-500 hidden sm:inline">
+                                    <span className="text-xs text-[var(--text-muted)] hidden sm:inline">
                                         {selectedCert.issuer} · {selectedCert.year}
                                     </span>
                                 </div>
                                 <button
                                     onClick={closeLightbox}
-                                    className="p-1.5 rounded-lg hover:bg-white/10 transition-colors text-gray-400 hover:text-white flex-shrink-0"
+                                    className="p-1.5 rounded-lg hover:bg-[var(--glass-bg)] transition-colors text-[var(--text-muted)] hover:text-[var(--text-white)] flex-shrink-0"
                                 >
                                     <X size={20} />
                                 </button>
                             </div>
 
-                            {/* === PDF VIEWER === */}
+                            {/* PDF Viewer */}
                             <div className="flex-1 overflow-y-auto p-4 scrollbar-thin scrollbar-thumb-blue-500/30 scrollbar-track-transparent">
                                 <div className="flex flex-col items-center gap-4">
                                     {selectedCert.pdf && (
@@ -248,13 +255,13 @@ export default function Certificates() {
                                             loading={
                                                 <div className="flex flex-col items-center gap-3 py-12">
                                                     <Loader2 size={48} className="animate-spin text-blue-400" />
-                                                    <p className="text-gray-400">Loading PDF...</p>
+                                                    <p className="text-[var(--text-muted)]">Loading PDF...</p>
                                                 </div>
                                             }
                                             error={
                                                 <div className="flex flex-col items-center gap-3 py-12">
                                                     <FileText size={48} className="text-red-400" />
-                                                    <p className="text-gray-400">Failed to load PDF</p>
+                                                    <p className="text-[var(--text-muted)]">Failed to load PDF</p>
                                                 </div>
                                             }
                                         >
@@ -270,83 +277,75 @@ export default function Certificates() {
                                 </div>
                             </div>
 
-                            {/* === TOOLBAR DI BAWAH (seperti browser) === */}
-                            <div className="flex-shrink-0 flex flex-wrap items-center justify-center gap-2 p-3 glass border-t border-white/5">
-                                {/* Left: Page Navigation */}
+                            {/* Toolbar */}
+                            <div className="flex-shrink-0 flex flex-wrap items-center justify-center gap-2 p-3 glass border-t border-[var(--glass-border)]">
+                                {/* Page navigation */}
                                 <div className="flex items-center gap-1">
                                     <button
                                         onClick={goToPrevPage}
                                         disabled={pageNumber <= 1}
-                                        className="p-1.5 rounded-lg hover:bg-white/10 transition-colors text-gray-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"
-                                        aria-label="Previous page"
+                                        className="p-1.5 rounded-lg hover:bg-[var(--glass-bg)] transition-colors text-[var(--text-muted)] hover:text-[var(--text-white)] disabled:opacity-30 disabled:cursor-not-allowed"
                                     >
                                         <ChevronLeft size={18} />
                                     </button>
-                                    <span className="text-xs text-gray-400 min-w-[70px] text-center font-medium">
-                                        {numPages ? `${pageNumber} / ${numPages}` : "Loading..."}
+                                    <span className="text-xs text-[var(--text-muted)] min-w-[70px] text-center font-medium">
+                                        {numPages ? `${pageNumber} / ${numPages}` : 'Loading...'}
                                     </span>
                                     <button
                                         onClick={goToNextPage}
                                         disabled={pageNumber >= numPages}
-                                        className="p-1.5 rounded-lg hover:bg-white/10 transition-colors text-gray-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"
-                                        aria-label="Next page"
+                                        className="p-1.5 rounded-lg hover:bg-[var(--glass-bg)] transition-colors text-[var(--text-muted)] hover:text-[var(--text-white)] disabled:opacity-30 disabled:cursor-not-allowed"
                                     >
                                         <ChevronRight size={18} />
                                     </button>
                                 </div>
 
-                                <div className="w-px h-6 bg-white/10 hidden sm:block" />
+                                <div className="w-px h-6 bg-[var(--glass-border)] hidden sm:block" />
 
-                                {/* Center: Zoom Controls */}
+                                {/* Zoom controls */}
                                 <div className="flex items-center gap-1">
                                     <button
                                         onClick={handleZoomOut}
-                                        className="p-1.5 rounded-lg hover:bg-white/10 transition-colors text-gray-400 hover:text-white"
-                                        aria-label="Zoom out"
+                                        className="p-1.5 rounded-lg hover:bg-[var(--glass-bg)] transition-colors text-[var(--text-muted)] hover:text-[var(--text-white)]"
                                     >
                                         <ZoomOut size={16} />
                                     </button>
-                                    <span className="text-xs text-gray-400 min-w-[40px] text-center font-medium">
+                                    <span className="text-xs text-[var(--text-muted)] min-w-[40px] text-center font-medium">
                                         {Math.round(zoomLevel * 100)}%
                                     </span>
                                     <button
                                         onClick={handleZoomIn}
-                                        className="p-1.5 rounded-lg hover:bg-white/10 transition-colors text-gray-400 hover:text-white"
-                                        aria-label="Zoom in"
+                                        className="p-1.5 rounded-lg hover:bg-[var(--glass-bg)] transition-colors text-[var(--text-muted)] hover:text-[var(--text-white)]"
                                     >
                                         <ZoomIn size={16} />
                                     </button>
                                     <button
                                         onClick={handleResetZoom}
-                                        className="p-1.5 rounded-lg hover:bg-white/10 transition-colors text-gray-400 hover:text-white"
-                                        aria-label="Reset zoom"
+                                        className="p-1.5 rounded-lg hover:bg-[var(--glass-bg)] transition-colors text-[var(--text-muted)] hover:text-[var(--text-white)]"
                                     >
                                         <RotateCcw size={14} />
                                     </button>
                                 </div>
 
-                                <div className="w-px h-6 bg-white/10 hidden sm:block" />
+                                <div className="w-px h-6 bg-[var(--glass-border)] hidden sm:block" />
 
-                                {/* Right: Actions */}
+                                {/* Action buttons */}
                                 <div className="flex items-center gap-1">
                                     <button
                                         onClick={handlePrint}
-                                        className="p-1.5 rounded-lg hover:bg-white/10 transition-colors text-gray-400 hover:text-white"
-                                        aria-label="Print"
+                                        className="p-1.5 rounded-lg hover:bg-[var(--glass-bg)] transition-colors text-[var(--text-muted)] hover:text-[var(--text-white)]"
                                     >
                                         <Printer size={16} />
                                     </button>
                                     <button
                                         onClick={toggleFullscreen}
-                                        className="p-1.5 rounded-lg hover:bg-white/10 transition-colors text-gray-400 hover:text-white"
-                                        aria-label="Fullscreen"
+                                        className="p-1.5 rounded-lg hover:bg-[var(--glass-bg)] transition-colors text-[var(--text-muted)] hover:text-[var(--text-white)]"
                                     >
                                         {isFullscreen ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
                                     </button>
                                     <button
                                         onClick={handleDownload}
                                         className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-500/20 text-blue-400 hover:bg-blue-500/30 transition-colors text-xs font-medium"
-                                        aria-label="Download PDF"
                                     >
                                         <Download size={14} />
                                         Download

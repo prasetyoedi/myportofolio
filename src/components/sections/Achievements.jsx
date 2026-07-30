@@ -1,7 +1,6 @@
-import React from "react";
-import { AnimatedSection } from "../AnimatedSection";
-import { data } from "../../data";
-import { Trophy } from "lucide-react";
+import React from 'react';
+import { AnimatedSection } from '../AnimatedSection';
+import { data } from '../../data';
 
 export default function Achievements() {
     return (
@@ -16,8 +15,8 @@ export default function Achievements() {
                         <AnimatedSection key={idx} delay={idx * 80}>
                             <div className="glass p-6 rounded-2xl card-hover text-center">
                                 <div className="text-4xl mb-3">{ach.icon}</div>
-                                <h4 className="font-bold text-white text-sm">{ach.title}</h4>
-                                <p className="text-xs text-gray-400 mt-1 leading-relaxed">{ach.description}</p>
+                                <h4 className="font-bold text-[var(--text-white)] text-sm">{ach.title}</h4>
+                                <p className="text-xs text-[var(--text-muted)] mt-1 leading-relaxed">{ach.description}</p>
                                 <p className="text-xs text-blue-400 mt-2 font-medium">{ach.year}</p>
                             </div>
                         </AnimatedSection>
