@@ -8,7 +8,6 @@ import {
   Github,
   Linkedin,
   MapPin,
-  MessageCircle,
   ArrowUpRight,
   Send,
 } from 'lucide-react';
@@ -114,7 +113,7 @@ export default function Contact() {
           </AnimatedSection>
 
           {/* Direct Platforms & Channels */}
-          <div className="grid sm:grid-cols-3 gap-4">
+          <div className="grid sm:grid-cols-2 gap-4">
             {/* LinkedIn */}
             <AnimatedSection delay={100}>
               <a
@@ -134,7 +133,7 @@ export default function Contact() {
                     LinkedIn
                   </h4>
                   <p className="text-xs font-mono text-slate-600 dark:text-slate-400 mt-0.5 truncate font-medium">
-                    /in/prasetyo-edi
+                    /in/prasetyo-edi-pamungkas
                   </p>
                 </div>
               </a>
@@ -160,31 +159,6 @@ export default function Contact() {
                   </h4>
                   <p className="text-xs font-mono text-slate-600 dark:text-slate-400 mt-0.5 truncate font-medium">
                     @prasetyoedi
-                  </p>
-                </div>
-              </a>
-            </AnimatedSection>
-
-            {/* WhatsApp */}
-            <AnimatedSection delay={160}>
-              <a
-                href={data.whatsapp}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="ocean-card p-5 rounded-2xl flex flex-col justify-between h-full group hover:border-teal-600 dark:hover:border-teal-500/40 transition-all min-h-[120px]"
-              >
-                <div className="flex items-center justify-between mb-3">
-                  <div className="p-2 rounded-xl bg-emerald-100 dark:bg-emerald-500/15 text-emerald-800 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-500/30">
-                    <MessageCircle size={20} />
-                  </div>
-                  <ArrowUpRight size={16} className="text-slate-500 dark:text-slate-400 group-hover:text-teal-600 dark:group-hover:text-teal-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-                </div>
-                <div>
-                  <h4 className="font-display font-bold text-slate-950 dark:text-white text-sm">
-                    WhatsApp
-                  </h4>
-                  <p className="text-xs font-mono text-slate-600 dark:text-slate-400 mt-0.5 font-medium">
-                    {data.phone}
                   </p>
                 </div>
               </a>

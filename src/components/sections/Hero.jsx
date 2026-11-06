@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
+import { ArrowDown } from 'lucide-react';
 import { data } from '../../data';
 
 export default function Hero() {
@@ -56,31 +56,57 @@ export default function Hero() {
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, delay: 0.16 }}
-          className="mt-6 text-sm sm:text-base md:text-lg text-slate-800 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed font-sans font-normal"
+          className="mt-6 text-sm sm:text-base md:text-lg text-slate-800 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed font-sans font-normal"
         >
-          Engineering digital approval workflows, high-throughput REST APIs, and reactive web interfaces.
-          Currently developing Go ad-engine microservices at <span className="text-slate-950 dark:text-white font-semibold">PT EbyB</span>,
-          with enterprise background in ASP.NET Core at <span className="text-slate-950 dark:text-white font-semibold">Hino Motors</span> and Laravel at <span className="text-slate-950 dark:text-white font-semibold">Senyumin</span>.
+          Building scalable web applications, high-performance REST APIs, and enterprise workflow solutions.
+          Currently developing Go-based advertising microservices at <span className="text-slate-950 dark:text-white">PT EbyB Global Marketplace</span>,
+          with enterprise background in ASP.NET Core at <span className="text-slate-950 dark:text-white">Hino Motors Manufacturing Indonesia</span> and Laravel at <span className="text-slate-950 dark:text-white">PT Senyum Cerdas Indonesia</span>.
         </motion.p>
 
-        {/* Key Metrics Strip */}
+        {/* Key Metrics / Achievements */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, delay: 0.22 }}
-          className="mt-8 grid grid-cols-3 max-w-xl mx-auto gap-2 sm:gap-4 p-2.5 rounded-2xl ocean-card"
+          className="mt-8 grid grid-cols-1 sm:grid-cols-3 max-w-3xl mx-auto gap-3 p-2.5 rounded-2xl ocean-card"
         >
-          <div className="p-2 text-center">
-            <span className="block font-mono text-base sm:text-xl font-bold text-cyan-800 dark:text-cyan-300">3.85 / 4.00</span>
-            <span className="text-[11px] text-slate-700 dark:text-slate-400 font-medium">UGM Cum Laude</span>
+          {/* 1. Academic Achievement */}
+          <div className="p-3.5 rounded-xl bg-slate-100/70 dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/[0.04] flex flex-col justify-center items-center text-center">
+            <span className="font-mono text-base sm:text-lg md:text-xl font-bold text-cyan-800 dark:text-cyan-300">
+              3.85 / 4.00
+            </span>
+            <span className="text-xs sm:text-sm font-semibold text-slate-900 dark:text-slate-100 mt-1">
+              UGM Cum Laude
+            </span>
+            <span className="text-[10px] sm:text-[11px] font-mono tracking-wider uppercase text-slate-500 dark:text-slate-400 mt-0.5 font-medium">
+              Academic Achievement
+            </span>
           </div>
-          <div className="p-2 text-center border-x border-slate-300 dark:border-white/[0.08]">
-            <span className="block font-mono text-base sm:text-xl font-bold text-teal-800 dark:text-teal-300">Go · .NET · PHP</span>
-            <span className="text-[11px] text-slate-700 dark:text-slate-400 font-medium">Backend Stacks</span>
+
+          {/* 2. Technical Expertise */}
+          <div className="p-3.5 rounded-xl bg-slate-100/70 dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/[0.04] flex flex-col justify-center items-center text-center">
+            <span className="font-mono text-xs sm:text-sm font-bold text-teal-800 dark:text-teal-300 leading-snug">
+              Go, ASP.NET Core, PHP, React, Next.js
+            </span>
+            <span className="text-xs sm:text-sm font-semibold text-slate-900 dark:text-slate-100 mt-1">
+              Full Stack Technologies
+            </span>
+            <span className="text-[10px] sm:text-[11px] font-mono tracking-wider uppercase text-slate-500 dark:text-slate-400 mt-0.5 font-medium">
+              Technical Expertise
+            </span>
           </div>
-          <div className="p-2 text-center">
-            <span className="block font-mono text-base sm:text-xl font-bold text-cyan-800 dark:text-cyan-300">2x PIMNAS</span>
-            <span className="text-[11px] text-slate-700 dark:text-slate-400 font-medium">Gold &amp; Silver Medal</span>
+
+          {/* 3. National Achievement */}
+          <div className="p-3.5 rounded-xl bg-slate-100/70 dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/[0.04] flex flex-col justify-center items-center text-center">
+            <span className="font-mono text-base sm:text-lg md:text-xl font-bold text-cyan-800 dark:text-cyan-300">
+              2× PIMNAS
+            </span>
+            <span className="text-xs sm:text-sm font-semibold text-slate-900 dark:text-slate-100 mt-1">
+              Gold &amp; Silver
+            </span>
+            <span className="text-[10px] sm:text-[11px] font-mono tracking-wider uppercase text-slate-500 dark:text-slate-400 mt-0.5 font-medium">
+              National Achievement
+            </span>
           </div>
         </motion.div>
 
@@ -97,40 +123,6 @@ export default function Hero() {
           </a>
           <a href="#contact" className="btn-ocean-secondary min-h-[44px]">
             <span>Get in Touch</span>
-          </a>
-        </motion.div>
-
-        {/* Social / Direct Channels */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.35 }}
-          className="mt-8 flex items-center justify-center gap-3"
-        >
-          <a
-            href={data.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub Profile"
-            className="flex h-11 w-11 items-center justify-center rounded-full ocean-card text-slate-800 dark:text-slate-300 hover:text-cyan-700 dark:hover:text-cyan-300 transition-all border border-slate-300 dark:border-white/[0.08]"
-          >
-            <Github size={18} />
-          </a>
-          <a
-            href={data.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn Profile"
-            className="flex h-11 w-11 items-center justify-center rounded-full ocean-card text-slate-800 dark:text-slate-300 hover:text-cyan-700 dark:hover:text-cyan-300 transition-all border border-slate-300 dark:border-white/[0.08]"
-          >
-            <Linkedin size={18} />
-          </a>
-          <a
-            href={`mailto:${data.email}`}
-            aria-label="Direct Email"
-            className="flex h-11 w-11 items-center justify-center rounded-full ocean-card text-slate-800 dark:text-slate-300 hover:text-cyan-700 dark:hover:text-cyan-300 transition-all border border-slate-300 dark:border-white/[0.08]"
-          >
-            <Mail size={18} />
           </a>
         </motion.div>
       </div>

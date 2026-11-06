@@ -95,7 +95,7 @@ export default function Projects() {
                       ) : (
                         <span className="inline-flex items-center gap-1.5 text-slate-500 dark:text-slate-500 font-medium">
                           <ShieldCheck size={14} />
-                          <span>Internal Enterprise System</span>
+                          <span>Private Repository</span>
                         </span>
                       )}
 

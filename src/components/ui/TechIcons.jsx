@@ -1,11 +1,13 @@
 import React from 'react';
 
 /**
- * Clean, lightweight SVG Brand Icons for developer tech stacks.
+ * Clean, lightweight SVG Brand & Technical Icons for developer tech stacks.
  * Rendered with authentic brand colors and responsive sizing.
  */
 export const TechIcon = ({ name, className = 'h-5 w-5' }) => {
-  switch (name.toLowerCase()) {
+  const key = name.toLowerCase();
+
+  switch (key) {
     case 'go (golang)':
     case 'go':
     case 'golang':
@@ -42,6 +44,16 @@ export const TechIcon = ({ name, className = 'h-5 w-5' }) => {
         </svg>
       );
 
+    case 'api architecture':
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`text-[#0284C7] ${className}`}>
+          <rect x="2" y="2" width="20" height="8" rx="2" />
+          <rect x="2" y="14" width="20" height="8" rx="2" />
+          <line x1="6" y1="6" x2="6.01" y2="6" strokeWidth="3" />
+          <line x1="6" y1="18" x2="6.01" y2="18" strokeWidth="3" />
+        </svg>
+      );
+
     case 'react.js':
     case 'react':
       return (
@@ -69,6 +81,26 @@ export const TechIcon = ({ name, className = 'h-5 w-5' }) => {
         </svg>
       );
 
+    case 'devextreme / devexpress':
+    case 'devextreme':
+    case 'devexpress':
+      return (
+        <svg viewBox="0 0 24 24" fill="currentColor" className={`text-[#FF5722] ${className}`}>
+          <rect x="3" y="3" width="8" height="8" rx="1.5" />
+          <rect x="13" y="3" width="8" height="8" rx="1.5" />
+          <rect x="3" y="13" width="8" height="8" rx="1.5" />
+          <rect x="13" y="13" width="8" height="8" rx="1.5" />
+        </svg>
+      );
+
+    case 'bootstrap 5 & jquery':
+    case 'bootstrap':
+      return (
+        <svg viewBox="0 0 24 24" fill="currentColor" className={`text-[#7952B3] ${className}`}>
+          <path d="M4 4h10c3.3 0 6 2.2 6 5.5 0 2-1 3.8-2.6 4.6 2.1.8 3.6 2.8 3.6 5.4 0 3.6-2.9 6.5-6.5 6.5H4V4zm6.5 7h3.5c1.4 0 2.5-1.1 2.5-2.5S15.4 6 14 6h-3.5v5zm0 11h4c1.7 0 3-1.3 3-3s-1.3-3-3-3h-4v6z" />
+        </svg>
+      );
+
     case 'mysql':
       return (
         <svg viewBox="0 0 24 24" fill="currentColor" className={`text-[#00758F] ${className}`}>
@@ -88,6 +120,15 @@ export const TechIcon = ({ name, className = 'h-5 w-5' }) => {
       return (
         <svg viewBox="0 0 24 24" fill="currentColor" className={`text-[#336791] ${className}`}>
           <path d="M12 2a9.98 9.98 0 0 0-7.8 3.8C3.4 7 3 8.4 3 10c0 4.4 2.6 8.2 6.5 9.4-.1-.5-.2-1.2-.2-1.8 0-.4 0-.8.1-1.2-1.3-.1-2.4-.7-2.8-1.7-.1-.3-.1-.7 0-1 .4.2 1 .3 1.6.3-.9-.6-1.5-1.6-1.5-2.8 0-.6.2-1.2.5-1.7 1.4 1.8 3.5 2.9 5.8 3-.1-.2-.1-.5-.1-.8 0-1.9 1.6-3.5 3.5-3.5 1 0 1.9.4 2.5 1.1.8-.2 1.5-.5 2.2-.9-.3.9-.9 1.6-1.7 2 .7-.1 1.4-.3 2.1-.6-.5.7-1.1 1.4-1.8 1.9.1.5.1 1 .1 1.5 0 4.6-3.5 9.7-9.7 9.7A9.9 9.9 0 0 0 22 12c0-5.5-4.5-10-10-10z" />
+        </svg>
+      );
+
+    case 'oracle & sqlite':
+    case 'oracle':
+    case 'sqlite':
+      return (
+        <svg viewBox="0 0 24 24" fill="currentColor" className={`text-[#F80000] ${className}`}>
+          <path d="M12 4C6.5 4 2 7.6 2 12s4.5 8 10 8 10-3.6 10-8-4.5-8-10-8zm0 13c-3.9 0-7-2.2-7-5s3.1-5 7-5 7 2.2 7 5-3.1 5-7 5z" />
         </svg>
       );
 
@@ -118,13 +159,54 @@ export const TechIcon = ({ name, className = 'h-5 w-5' }) => {
         </svg>
       );
 
+    case 'database erd':
+    case 'erd':
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`text-[#38BDF8] ${className}`}>
+          <rect x="3" y="3" width="7" height="7" rx="1" />
+          <rect x="14" y="3" width="7" height="7" rx="1" />
+          <rect x="8.5" y="14" width="7" height="7" rx="1" />
+          <path d="M6.5 10v2h11v-2M12 12v2" />
+        </svg>
+      );
+
+    case 'scrum & agile':
+    case 'scrum':
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`text-[#F59E0B] ${className}`}>
+          <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" />
+        </svg>
+      );
+
+    case 'third-party apis':
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`text-[#10B981] ${className}`}>
+          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+        </svg>
+      );
+
+    case 'performance & qa':
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`text-[#EC4899] ${className}`}>
+          <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+        </svg>
+      );
+
+    case 'analytics & db tools':
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`text-[#8B5CF6] ${className}`}>
+          <path d="M3 3v18h18" />
+          <path d="m19 9-5 5-4-4-3 3" />
+        </svg>
+      );
+
     default:
       return (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`text-cyan-400 ${className}`}>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`text-cyan-500 ${className}`}>
           <circle cx="12" cy="12" r="10" />
           <path d="m9 12 2 2 4-4" />
         </svg>
       );
   }
 };
-

@@ -117,6 +117,27 @@ export const data = {
 
   projects: [
     {
+      id: "eby-ads-platform",
+      title: "Multi-Channel Ad Management & Metrics Engine",
+      category: "Backend & API Integration",
+      context: "PT EbyB Global Marketplace",
+      year: "2026",
+      problem:
+        "Managing high-velocity advertising across TikTok Ads and Google Ads required constant manual intervention and lacked centralized performance intelligence.",
+      solution:
+        "Built high-performance Go (Gin) REST services integrating TikTok OAuth, campaign CRUD dispatchers, and automated metric synchronization pipelines with AI recommendation feeds.",
+      previewType: "ads-engine",
+      highlights: [
+        "TikTok Ads API & Google Ads API integration via resilient webhook queues",
+        "AI-driven telemetry analysis for automated campaign budget re-allocation",
+        "High-performance Go backend with optimized relational persistence",
+      ],
+      tech: ["Go (Golang)", "Gin Framework", "TikTok Ads API", "Google Ads API", "SQL", "REST API"],
+      github: null,
+      demo: null,
+      badge: "Production Microservice",
+    },
+    {
       id: "hmm-sales-order",
       title: "Hino Motors Service Parts Sales Order System",
       category: "Enterprise System & Digital Workflow",
@@ -159,47 +180,6 @@ export const data = {
       badge: "Team Lead & Architecture",
     },
     {
-      id: "eby-ads-platform",
-      title: "Multi-Channel Ad Management & Metrics Engine",
-      category: "Backend & API Integration",
-      context: "PT EbyB Global Marketplace",
-      year: "2026",
-      problem:
-        "Managing high-velocity advertising across TikTok Ads and Google Ads required constant manual intervention and lacked centralized performance intelligence.",
-      solution:
-        "Built high-performance Go (Gin) REST services integrating TikTok OAuth, campaign CRUD dispatchers, and automated metric synchronization pipelines with AI recommendation feeds.",
-      previewType: "ads-engine",
-      highlights: [
-        "TikTok Ads API & Google Ads API integration via resilient webhook queues",
-        "AI-driven telemetry analysis for automated campaign budget re-allocation",
-        "High-performance Go backend with optimized relational persistence",
-      ],
-      tech: ["Go (Golang)", "Gin Framework", "TikTok Ads API", "Google Ads API", "SQL", "REST API"],
-      github: null,
-      demo: null,
-      badge: "Production Microservice",
-    },
-    {
-      id: "gelex-ugm",
-      title: "Gelanggang Expo UGM 2023 Official Portal",
-      category: "High-Traffic Event Platform",
-      context: "Universitas Gadjah Mada Annual Event",
-      year: "2023",
-      problem:
-        "Thousands of incoming university students required a responsive, low-latency mobile portal to explore student activity units, event timelines, and campus community directories.",
-      solution:
-        "Designed and deployed a mobile-first web interface using Next.js and Tailwind CSS, prioritizing zero layout shift, component reusability, and instant mobile touch responsiveness.",
-      previewType: "event-portal",
-      highlights: [
-        "Mobile-first architecture built for concurrent student traffic surges",
-        "Optimized asset loading and accessible navigation hierarchy",
-      ],
-      tech: ["Next.js", "Tailwind CSS", "JavaScript", "Vercel"],
-      github: null,
-      demo: null,
-      badge: "Campus Production",
-    },
-    {
       id: "denteksi",
       title: "Senyumin (Denteksi) — AI Dental Screening Workflow",
       category: "HealthTech & Computer Vision Pipeline",
@@ -238,6 +218,26 @@ export const data = {
       github: "https://github.com/Haikal-Adityo/Cinurawa",
       demo: null,
       badge: "Client CMS",
+    },
+    {
+      id: "gelex-ugm",
+      title: "Gelanggang Expo UGM 2023 Official Portal",
+      category: "High-Traffic Event Platform",
+      context: "Universitas Gadjah Mada Annual Event",
+      year: "2023",
+      problem:
+        "Thousands of incoming university students required a responsive, low-latency mobile portal to explore student activity units, event timelines, and campus community directories.",
+      solution:
+        "Designed and deployed a mobile-first web interface using Next.js and Tailwind CSS, prioritizing zero layout shift, component reusability, and instant mobile touch responsiveness.",
+      previewType: "event-portal",
+      highlights: [
+        "Mobile-first architecture built for concurrent student traffic surges",
+        "Optimized asset loading and accessible navigation hierarchy",
+      ],
+      tech: ["Next.js", "Tailwind CSS", "JavaScript", "Vercel"],
+      github: null,
+      demo: null,
+      badge: "Campus Production",
     },
   ],
 

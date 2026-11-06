@@ -61,7 +61,7 @@ export default function TechStack() {
           </div>
         </AnimatedSection>
 
-        {/* 5-Category Matrix with Brand SVG Icons */}
+        {/* 5-Category Matrix with Brand SVG Icons & Full Detail Chips */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {categories.map((catKey, idx) => {
             const meta = categoryMeta[catKey];
@@ -86,27 +86,33 @@ export default function TechStack() {
                       {meta.desc}
                     </p>
 
-                    {/* Skill items with relevant Brand SVG Icons */}
-                    <div className="space-y-2.5">
+                    {/* Skill items with full information visible (no truncation) */}
+                    <div className="space-y-3">
                       {items.map((skill) => (
                         <div
                           key={skill.name}
-                          className="rounded-lg bg-slate-100 dark:bg-[#020b17]/80 border border-slate-300 dark:border-white/[0.04] p-2.5 hover:border-cyan-600 dark:hover:border-cyan-500/30 hover:bg-cyan-50/60 dark:hover:bg-cyan-500/5 transition-all flex items-center justify-between gap-3"
+                          className="rounded-xl bg-slate-100/90 dark:bg-[#020b17]/80 border border-slate-300/80 dark:border-white/[0.05] p-3 hover:border-cyan-600 dark:hover:border-cyan-500/30 hover:bg-cyan-50/50 dark:hover:bg-cyan-950/20 transition-all flex flex-col justify-between"
                         >
-                          <div className="min-w-0 flex-1">
-                            <div className="flex items-center gap-2">
-                              <span className="font-bold text-xs text-slate-950 dark:text-slate-200">
-                                {skill.name}
-                              </span>
+                          {/* Title & Brand Icon Header */}
+                          <div className="flex items-center justify-between gap-2 mb-2">
+                            <span className="font-bold text-xs sm:text-sm text-slate-950 dark:text-slate-100">
+                              {skill.name}
+                            </span>
+                            <div className="shrink-0 p-1.5 rounded-md bg-white dark:bg-white/[0.06] shadow-sm border border-slate-200 dark:border-white/[0.08]">
+                              <TechIcon name={skill.name} className="h-4 w-4" />
                             </div>
-                            <p className="text-[11px] font-mono text-slate-600 dark:text-slate-400 mt-0.5 truncate font-medium">
-                              {skill.detail}
-                            </p>
                           </div>
 
-                          {/* Brand Tech Icon */}
-                          <div className="shrink-0 p-1.5 rounded-md bg-white dark:bg-white/[0.06] shadow-sm border border-slate-300 dark:border-white/[0.05]">
-                            <TechIcon name={skill.name} className="h-4 w-4" />
+                          {/* Full Detail Badges - 100% visible without any ellipsis */}
+                          <div className="flex flex-wrap gap-1.5 pt-1">
+                            {skill.detail.split(',').map((tag) => (
+                              <span
+                                key={tag.trim()}
+                                className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-mono bg-white dark:bg-white/[0.04] text-slate-700 dark:text-slate-300 border border-slate-300/80 dark:border-white/[0.06] font-medium leading-tight"
+                              >
+                                {tag.trim()}
+                              </span>
+                            ))}
                           </div>
                         </div>
                       ))}
