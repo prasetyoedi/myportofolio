@@ -1,160 +1,131 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowDown, Github, Linkedin, Mail, ChevronRight } from 'lucide-react';
-import gsap from 'gsap';
+import { ArrowDown } from 'lucide-react';
 import { data } from '../../data';
 
 export default function Hero() {
-    const heroRef = useRef(null);
-    const titleRef = useRef(null);
-    const subtitleRef = useRef(null);
-    const ctaRef = useRef(null);
-    const scrollRef = useRef(null);
-    const blob1Ref = useRef(null);
-    const blob2Ref = useRef(null);
+  return (
+    <section
+      id="home"
+      className="relative min-h-[90vh] flex items-center justify-center pt-28 pb-20 px-5 overflow-hidden"
+      style={{
+        background: 'var(--ocean-hero)',
+      }}
+    >
+      {/* Sunlight Surface Glow */}
+      <div
+        className="absolute -top-32 left-1/2 -translate-x-1/2 w-[720px] h-[360px] rounded-full blur-[120px] pointer-events-none opacity-30 dark:opacity-20"
+        style={{
+          background: 'radial-gradient(ellipse, #06b6d4, #14b8a6, transparent 70%)',
+        }}
+      />
 
-    useEffect(() => {
-        const ctx = gsap.context(() => {
-            gsap.from(titleRef.current, {
-                opacity: 0,
-                y: 60,
-                duration: 1.2,
-                ease: 'power4.out',
-                delay: 0.3,
-            });
-            gsap.from(subtitleRef.current, {
-                opacity: 0,
-                y: 40,
-                duration: 1,
-                ease: 'power4.out',
-                delay: 0.6,
-            });
-            gsap.from(ctaRef.current, {
-                opacity: 0,
-                y: 30,
-                duration: 0.9,
-                ease: 'power4.out',
-                delay: 0.9,
-            });
-            gsap.from(scrollRef.current, {
-                opacity: 0,
-                y: 20,
-                duration: 0.8,
-                ease: 'power4.out',
-                delay: 1.2,
-            });
-            gsap.to(blob1Ref.current, {
-                x: 40,
-                y: -30,
-                duration: 12,
-                repeat: -1,
-                yoyo: true,
-                ease: 'sine.inOut',
-            });
-            gsap.to(blob2Ref.current, {
-                x: -50,
-                y: 20,
-                duration: 15,
-                repeat: -1,
-                yoyo: true,
-                ease: 'sine.inOut',
-                delay: 2,
-            });
-        }, heroRef);
-
-        return () => ctx.revert();
-    }, []);
-
-    return (
-        <section
-            id="home"
-            ref={heroRef}
-            className="relative min-h-screen flex items-center justify-center overflow-hidden px-5"
-            style={{ paddingTop: '80px' }}
+      <div className="relative z-10 max-w-4xl mx-auto text-center">
+        {/* Availability Status Pill */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full ocean-card mb-8 text-xs font-mono shadow-sm"
         >
-            <div ref={blob1Ref} className="glow-blob glow-blob-blue w-[500px] h-[500px] -top-20 -left-40" />
-            <div ref={blob2Ref} className="glow-blob glow-blob-cyan w-[400px] h-[400px] -bottom-40 -right-40" />
-            <div className="glow-blob glow-blob-purple w-[300px] h-[300px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+          <span className="relative flex h-2.5 w-2.5">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-500 opacity-75" />
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-teal-600 shadow-[0_0_8px_#0d9488]" />
+          </span>
+          <span className="text-slate-900 dark:text-slate-200 font-semibold">
+            {data.availability.status}
+          </span>
+        </motion.div>
 
-            <div className="relative z-10 max-w-4xl mx-auto text-center">
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.6, delay: 0.1 }}
-                    className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-sm text-[var(--text-muted)] mb-6"
-                >
-                    <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                    Open to opportunities
-                </motion.div>
+        {/* Engineer Name & Title */}
+        <motion.div
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, delay: 0.08 }}
+        >
+          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-slate-950 dark:text-white leading-[1.08]">
+            Prasetyo Edi Pamungkas
+          </h1>
+          <p className="mt-3 font-mono text-base sm:text-lg text-cyan-800 dark:text-cyan-400 font-semibold">
+            Full Stack Software Engineer &amp; System Analyst
+          </p>
+        </motion.div>
 
-                <h1
-                    ref={titleRef}
-                    className="font-display text-4xl sm:text-5xl md:text-7xl font-bold leading-[1.08] tracking-tight"
-                >
-                    <span className="text-[var(--text-white)]">Hi, I'm</span>
-                    <br />
-                    <span className="gradient-text">Prasetyo Edi Pamungkas</span>
-                </h1>
+        {/* Technical Summary */}
+        <motion.p
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, delay: 0.16 }}
+          className="mt-6 text-sm sm:text-base md:text-lg text-slate-800 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed font-sans font-normal"
+        >
+          Building scalable web applications, high-performance REST APIs, and enterprise workflow solutions.
+          Currently developing Go-based advertising microservices at <span className="text-slate-950 dark:text-white">PT EbyB Global Marketplace</span>,
+          with enterprise background in ASP.NET Core at <span className="text-slate-950 dark:text-white">Hino Motors Manufacturing Indonesia</span> and Laravel at <span className="text-slate-950 dark:text-white">PT Senyum Cerdas Indonesia</span>.
+        </motion.p>
 
-                <p
-                    ref={subtitleRef}
-                    className="mt-6 text-base sm:text-lg text-[var(--text-muted)] max-w-2xl mx-auto leading-relaxed"
-                >
-                    {data.about.summary.slice(0, 335)}...
-                </p>
+        {/* Key Metrics / Achievements */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, delay: 0.22 }}
+          className="mt-8 grid grid-cols-1 sm:grid-cols-3 max-w-3xl mx-auto gap-3 p-2.5 rounded-2xl ocean-card"
+        >
+          {/* 1. Academic Achievement */}
+          <div className="p-3.5 rounded-xl bg-slate-100/70 dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/[0.04] flex flex-col justify-center items-center text-center">
+            <span className="font-mono text-base sm:text-lg md:text-xl font-bold text-cyan-800 dark:text-cyan-300">
+              3.85 / 4.00
+            </span>
+            <span className="text-xs sm:text-sm font-semibold text-slate-900 dark:text-slate-100 mt-1">
+              UGM Cum Laude
+            </span>
+            <span className="text-[10px] sm:text-[11px] font-mono tracking-wider uppercase text-slate-500 dark:text-slate-400 mt-0.5 font-medium">
+              Academic Achievement
+            </span>
+          </div>
 
-                <div ref={ctaRef} className="mt-10 flex flex-wrap items-center justify-center gap-4">
-                    <a href="#projects" className="btn-primary">
-                        View Projects <ChevronRight size={18} />
-                    </a>
-                    <a href="#contact" className="btn-secondary">
-                        Contact Me
-                    </a>
-                </div>
+          {/* 2. Technical Expertise */}
+          <div className="p-3.5 rounded-xl bg-slate-100/70 dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/[0.04] flex flex-col justify-center items-center text-center">
+            <span className="font-mono text-xs sm:text-sm font-bold text-teal-800 dark:text-teal-300 leading-snug">
+              Go, ASP.NET Core, PHP, React, Next.js
+            </span>
+            <span className="text-xs sm:text-sm font-semibold text-slate-900 dark:text-slate-100 mt-1">
+              Full Stack Technologies
+            </span>
+            <span className="text-[10px] sm:text-[11px] font-mono tracking-wider uppercase text-slate-500 dark:text-slate-400 mt-0.5 font-medium">
+              Technical Expertise
+            </span>
+          </div>
 
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1.0, duration: 0.6 }}
-                    className="mt-8 flex items-center justify-center gap-4"
-                >
-                    <a
-                        href={data.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-2 rounded-full glass text-[var(--text-muted)] hover:text-[var(--text-white)] hover:border-[var(--card-hover-border)] transition-all duration-300"
-                        aria-label="GitHub"
-                    >
-                        <Github size={20} />
-                    </a>
-                    <a
-                        href={data.linkedin}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-2 rounded-full glass text-[var(--text-muted)] hover:text-[var(--text-white)] hover:border-[var(--card-hover-border)] transition-all duration-300"
-                        aria-label="LinkedIn"
-                    >
-                        <Linkedin size={20} />
-                    </a>
-                    <a
-                        href={`mailto:${data.email}`}
-                        className="p-2 rounded-full glass text-[var(--text-muted)] hover:text-[var(--text-white)] hover:border-[var(--card-hover-border)] transition-all duration-300"
-                        aria-label="Email"
-                    >
-                        <Mail size={20} />
-                    </a>
-                </motion.div>
+          {/* 3. National Achievement */}
+          <div className="p-3.5 rounded-xl bg-slate-100/70 dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/[0.04] flex flex-col justify-center items-center text-center">
+            <span className="font-mono text-base sm:text-lg md:text-xl font-bold text-cyan-800 dark:text-cyan-300">
+              2× PIMNAS
+            </span>
+            <span className="text-xs sm:text-sm font-semibold text-slate-900 dark:text-slate-100 mt-1">
+              Gold &amp; Silver
+            </span>
+            <span className="text-[10px] sm:text-[11px] font-mono tracking-wider uppercase text-slate-500 dark:text-slate-400 mt-0.5 font-medium">
+              National Achievement
+            </span>
+          </div>
+        </motion.div>
 
-                <div ref={scrollRef} className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[var(--text-muted)] text-xs tracking-widest uppercase">
-                    <span>Scroll</span>
-                    <motion.div
-                        animate={{ y: [0, 6, 0] }}
-                        transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-                    >
-                        <ArrowDown size={16} />
-                    </motion.div>
-                </div>
-            </div>
-        </section>
-    );
+        {/* Action CTAs */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, delay: 0.28 }}
+          className="mt-10 flex flex-wrap items-center justify-center gap-3 sm:gap-4"
+        >
+          <a href="#projects" className="btn-ocean-primary min-h-[44px]">
+            <span>Explore Projects</span>
+            <ArrowDown size={15} />
+          </a>
+          <a href="#contact" className="btn-ocean-secondary min-h-[44px]">
+            <span>Get in Touch</span>
+          </a>
+        </motion.div>
+      </div>
+    </section>
+  );
 }

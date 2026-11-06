@@ -1,169 +1,180 @@
-import React, { useRef, useState } from 'react';
-import emailjs from '@emailjs/browser';
+import React, { useState } from 'react';
 import { AnimatedSection } from '../AnimatedSection';
 import { data } from '../../data';
-import { Mail, Github, Linkedin, Instagram, Send, Phone, MapPin } from 'lucide-react';
+import {
+  Mail,
+  Copy,
+  Check,
+  Github,
+  Linkedin,
+  MapPin,
+  ArrowUpRight,
+  Send,
+} from 'lucide-react';
 
 export default function Contact() {
-  const formRef = useRef();
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [status, setStatus] = useState(null);
+  const [copied, setCopied] = useState(false);
 
-  const sendEmail = (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    emailjs
-      .sendForm(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_default',
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_default',
-        formRef.current,
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'public_default'
-      )
-      .then(
-        () => {
-          setStatus({ type: 'success', message: 'Message sent successfully!' });
-          formRef.current.reset();
-          setIsSubmitting(false);
-        },
-        () => {
-          setStatus({ type: 'error', message: 'Failed to send. Please try again.' });
-          setIsSubmitting(false);
-        }
-      );
+  const handleCopyEmail = async () => {
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(data.email);
+      } else {
+        const textarea = document.createElement('textarea');
+        textarea.value = data.email;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+      }
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2400);
+    } catch (err) {
+      console.error('Failed to copy email: ', err);
+    }
   };
 
   return (
-    <section id="contact" className="py-24 px-5">
-      <div className="max-w-5xl mx-auto">
+    <section
+      id="contact"
+      className="py-24 px-5 relative overflow-hidden"
+      style={{
+        background: 'var(--ocean-contact)',
+      }}
+    >
+      <div className="max-w-4xl mx-auto relative z-10">
         <AnimatedSection>
-          <h2 className="section-title gradient-text text-center">Get In Touch</h2>
-          <p className="text-center text-[var(--text-muted)] mb-10 max-w-xl mx-auto">
-            Have a project in mind or want to collaborate? Let's connect.
-          </p>
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-slate-950 dark:text-white">
+              Get in Touch
+            </h2>
+            <p className="mt-3 text-sm sm:text-base text-slate-700 dark:text-slate-400 font-normal">
+              Open to full stack software engineering opportunities, systems analysis consultations, or technical collaboration.
+            </p>
+          </div>
         </AnimatedSection>
 
-        <div className="grid md:grid-cols-5 gap-8">
-          <div className="md:col-span-2 space-y-4">
-            <AnimatedSection delay={100}>
-              <div className="glass p-6 rounded-2xl">
-                <h3 className="font-bold text-[var(--text-white)] mb-4">Contact Information</h3>
-
-                <div className="space-y-3">
-                  <a
-                    href={`mailto:${data.email}`}
-                    className="flex items-center gap-3 text-[var(--text-muted)] hover:text-[var(--text-white)] transition-colors text-sm"
-                  >
-                    <Mail size={18} className="text-blue-400" /> {data.email}
-                  </a>
-                  <a
-                    href={data.whatsapp}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 text-[var(--text-muted)] hover:text-[var(--text-white)] transition-colors text-sm"
-                  >
-                    <Phone size={18} className="text-green-400" /> {data.phone}
-                  </a>
-                  <div className="flex items-center gap-3 text-[var(--text-muted)] text-sm">
-                    <MapPin size={18} className="text-red-400" /> {data.location}
-                  </div>
-                </div>
-
-                <div className="flex gap-3 mt-5 pt-4 border-t border-[var(--glass-border)]">
-                  <a
-                    href={data.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 rounded-full glass text-[var(--text-muted)] hover:text-[var(--text-white)] transition-colors"
-                  >
-                    <Github size={18} />
-                  </a>
-                  <a
-                    href={data.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 rounded-full glass text-[var(--text-muted)] hover:text-[var(--text-white)] transition-colors"
-                  >
-                    <Linkedin size={18} />
-                  </a>
-                  <a
-                    href={data.instagram}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 rounded-full glass text-[var(--text-muted)] hover:text-[var(--text-white)] transition-colors"
-                  >
-                    <Instagram size={18} />
-                  </a>
-                </div>
-              </div>
-            </AnimatedSection>
-          </div>
-
-          <div className="md:col-span-3">
-            <AnimatedSection delay={150}>
-              <div className="glass p-6 md:p-8 rounded-2xl">
-                <form ref={formRef} onSubmit={sendEmail} className="space-y-4">
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-[var(--text-muted)] mb-1.5">Name</label>
-                      <input
-                        type="text"
-                        name="user_name"
-                        required
-                        className="contact-input"
-                        placeholder="Your name"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-[var(--text-muted)] mb-1.5">Email</label>
-                      <input
-                        type="email"
-                        name="user_email"
-                        required
-                        className="contact-input"
-                        placeholder="you@email.com"
-                      />
-                    </div>
+        {/* Direct Communication Hub */}
+        <div className="space-y-6">
+          {/* Main Primary Email Card with 1-Click Copy & Direct Send */}
+          <AnimatedSection delay={60}>
+            <div className="ocean-card p-6 sm:p-8 rounded-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+              <div>
+                <span className="font-mono text-xs uppercase tracking-wider text-cyan-800 dark:text-cyan-400 font-bold block mb-2">
+                  Direct Electronic Mail
+                </span>
+                <div className="flex items-center gap-3">
+                  <div className="p-2.5 rounded-xl bg-cyan-100 dark:bg-cyan-500/10 text-cyan-900 dark:text-cyan-300 border border-cyan-300 dark:border-cyan-500/20">
+                    <Mail size={22} />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-[var(--text-muted)] mb-1.5">Subject</label>
-                    <input
-                      type="text"
-                      name="subject"
-                      required
-                      className="contact-input"
-                      placeholder="How can I help?"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-[var(--text-muted)] mb-1.5">Message</label>
-                    <textarea
-                      name="message"
-                      rows={4}
-                      required
-                      className="contact-input resize-none"
-                      placeholder="Tell me about your project..."
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="btn-primary w-full justify-center"
-                  >
-                    {isSubmitting ? 'Sending...' : 'Send Message'}
-                    <Send size={16} />
-                  </button>
-
-                  {status && (
-                    <p className={`text-sm text-center mt-2 ${status.type === 'success' ? 'text-green-400' : 'text-red-400'}`}>
-                      {status.message}
+                    <h3 className="font-mono text-base sm:text-xl font-bold text-slate-950 dark:text-white">
+                      {data.email}
+                    </h3>
+                    <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5 font-medium">
+                      Fastest response · Checked daily
                     </p>
-                  )}
-                </form>
+                  </div>
+                </div>
               </div>
+
+              {/* Action Buttons: Copy & Send */}
+              <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
+                <button
+                  type="button"
+                  onClick={handleCopyEmail}
+                  className="btn-ocean-secondary flex-1 md:flex-initial min-h-[44px]"
+                  aria-label="Copy email address to clipboard"
+                >
+                  {copied ? (
+                    <>
+                      <Check size={16} className="text-emerald-600 dark:text-emerald-400" />
+                      <span className="text-emerald-700 dark:text-emerald-300 font-bold">Email Copied!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy size={16} />
+                      <span>Copy Email</span>
+                    </>
+                  )}
+                </button>
+
+                <a
+                  href={`mailto:${data.email}?subject=Project%20Inquiry%20-%20Prasetyo%20Edi`}
+                  className="btn-ocean-primary flex-1 md:flex-initial min-h-[44px]"
+                >
+                  <span>Send Email</span>
+                  <Send size={15} />
+                </a>
+              </div>
+            </div>
+          </AnimatedSection>
+
+          {/* Direct Platforms & Channels */}
+          <div className="grid sm:grid-cols-2 gap-4">
+            {/* LinkedIn */}
+            <AnimatedSection delay={100}>
+              <a
+                href={data.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ocean-card p-5 rounded-2xl flex flex-col justify-between h-full group hover:border-cyan-600 dark:hover:border-cyan-500/40 transition-all min-h-[120px]"
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <div className="p-2 rounded-xl bg-[#0A66C2]/15 text-[#0A66C2] border border-[#0A66C2]/30">
+                    <Linkedin size={20} />
+                  </div>
+                  <ArrowUpRight size={16} className="text-slate-500 dark:text-slate-400 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                </div>
+                <div>
+                  <h4 className="font-display font-bold text-slate-950 dark:text-white text-sm">
+                    LinkedIn
+                  </h4>
+                  <p className="text-xs font-mono text-slate-600 dark:text-slate-400 mt-0.5 truncate font-medium">
+                    /in/prasetyo-edi-pamungkas
+                  </p>
+                </div>
+              </a>
+            </AnimatedSection>
+
+            {/* GitHub */}
+            <AnimatedSection delay={130}>
+              <a
+                href={data.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ocean-card p-5 rounded-2xl flex flex-col justify-between h-full group hover:border-cyan-600 dark:hover:border-cyan-500/40 transition-all min-h-[120px]"
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <div className="p-2 rounded-xl bg-slate-200 dark:bg-slate-500/15 text-slate-900 dark:text-slate-100 border border-slate-300 dark:border-slate-500/30">
+                    <Github size={20} />
+                  </div>
+                  <ArrowUpRight size={16} className="text-slate-500 dark:text-slate-400 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                </div>
+                <div>
+                  <h4 className="font-display font-bold text-slate-950 dark:text-white text-sm">
+                    GitHub
+                  </h4>
+                  <p className="text-xs font-mono text-slate-600 dark:text-slate-400 mt-0.5 truncate font-medium">
+                    @prasetyoedi
+                  </p>
+                </div>
+              </a>
             </AnimatedSection>
           </div>
+
+          {/* Location & Timezone Footer */}
+          <AnimatedSection delay={200}>
+            <div className="p-4 rounded-xl ocean-card flex items-center justify-between text-xs text-slate-700 dark:text-slate-400 font-mono font-medium">
+              <div className="flex items-center gap-2">
+                <MapPin size={15} className="text-rose-600 dark:text-rose-500 shrink-0" />
+                <span>{data.location}</span>
+              </div>
+              <span className="text-cyan-800 dark:text-cyan-400">Timezone: UTC+7 (WIB)</span>
+            </div>
+          </AnimatedSection>
         </div>
       </div>
     </section>

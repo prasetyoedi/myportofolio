@@ -1,68 +1,129 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { AnimatedSection } from '../AnimatedSection';
 import { data } from '../../data';
-import { Code2, Database, Server, Wrench, GitBranch, Brain } from 'lucide-react';
+import { TechIcon } from '../ui/TechIcons';
+import {
+  Server,
+  Code2,
+  Database,
+  Workflow,
+  Wrench,
+} from 'lucide-react';
 
-const categoryIcons = {
-    frontend: <Code2 size={20} />,
-    backend: <Server size={20} />,
-    database: <Database size={20} />,
-    tools: <Wrench size={20} />,
-    system: <GitBranch size={20} />,
-    soft: <Brain size={20} />,
+const categoryMeta = {
+  backend: {
+    label: 'Backend & APIs',
+    icon: Server,
+    desc: 'High-throughput microservices, RESTful interfaces, and OAuth security.',
+  },
+  frontend: {
+    label: 'Frontend & UI Engineering',
+    icon: Code2,
+    desc: 'Component-driven web apps, data-dense enterprise grids, responsive layouts.',
+  },
+  database: {
+    label: 'Database Systems',
+    icon: Database,
+    desc: 'Relational modeling, transaction integrity, indexing, and query tuning.',
+  },
+  analysis: {
+    label: 'System Analysis & Design',
+    icon: Workflow,
+    desc: 'BPMN 2.0 workflow modeling, UML diagrams, requirements specifications.',
+  },
+  tools: {
+    label: 'Tooling, APIs & QA',
+    icon: Wrench,
+    desc: 'Third-party integrations, performance auditing, version control pipelines.',
+  },
 };
-
-const categoryLabels = {
-    frontend: 'Frontend',
-    backend: 'Backend',
-    database: 'Database',
-    tools: 'Tools & VCS',
-    system: 'System Analysis',
-    soft: 'Soft Skills',
-};
-
-const categories = Object.keys(categoryLabels).filter(
-    (key) => data.skills[key] && data.skills[key].length > 0
-);
 
 export default function TechStack() {
-    return (
-        <section id="techstack" className="py-24 px-5 relative overflow-hidden">
-            <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-blue-500/5 blur-3xl" />
-            </div>
+  const categories = Object.keys(categoryMeta);
 
-            <div className="max-w-5xl mx-auto relative z-10">
-                <AnimatedSection>
-                    <h2 className="section-title gradient-text text-center">Tech Stack & Skills</h2>
-                </AnimatedSection>
+  return (
+    <section
+      id="skills"
+      className="py-24 px-5 relative overflow-hidden"
+      style={{
+        background: 'var(--ocean-skills)',
+      }}
+    >
+      <div className="max-w-6xl mx-auto">
+        <AnimatedSection>
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-slate-950 dark:text-white">
+              Technical Stack &amp; Architectural Tooling
+            </h2>
+            <p className="mt-3 text-sm sm:text-base text-slate-700 dark:text-slate-400">
+              Languages, frameworks, databases, and methodologies deployed across production environments.
+            </p>
+          </div>
+        </AnimatedSection>
 
-                <div className="space-y-8">
-                    {categories.map((category, idx) => (
-                        <AnimatedSection key={category} delay={idx * 100}>
-                            <div className="glass p-6 rounded-2xl border border-[var(--glass-border)] hover:border-blue-500/30 transition-all duration-300 hover:shadow-[0_8px_32px_rgba(59,130,246,0.08)]">
-                                <div className="flex items-center gap-3 mb-4">
-                                    <span className="text-blue-400">{categoryIcons[category]}</span>
-                                    <h3 className="text-lg font-semibold text-[var(--text-white)]">{categoryLabels[category]}</h3>
-                                </div>
-                                <div className="flex flex-wrap gap-3">
-                                    {data.skills[category].map((tech) => (
-                                        <motion.span
-                                            key={tech}
-                                            whileHover={{ scale: 1.05, y: -2 }}
-                                            transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-                                            className="px-4 py-2 rounded-full text-sm font-medium bg-[var(--tag-bg)] border border-[var(--tag-border)] text-[var(--text-muted)] hover:border-blue-400 hover:bg-blue-500/10 hover:text-[var(--text-white)] transition-all duration-300 cursor-default shadow-sm"
-                                        >
-                                            {tech}
-                                        </motion.span>
-                                    ))}
-                                </div>
+        {/* 5-Category Matrix with Brand SVG Icons & Full Detail Chips */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {categories.map((catKey, idx) => {
+            const meta = categoryMeta[catKey];
+            const items = data.skills[catKey] || [];
+            const Icon = meta.icon;
+
+            return (
+              <AnimatedSection key={catKey} delay={idx * 60}>
+                <div className="ocean-card p-6 rounded-2xl h-full flex flex-col justify-between group">
+                  <div>
+                    {/* Header */}
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="p-2 rounded-xl bg-cyan-100 dark:bg-cyan-500/10 text-cyan-900 dark:text-cyan-300 border border-cyan-300 dark:border-cyan-500/20 group-hover:border-cyan-600 dark:group-hover:border-cyan-500/40 transition-all">
+                        <Icon size={18} />
+                      </div>
+                      <h3 className="font-display font-bold text-slate-950 dark:text-white text-base">
+                        {meta.label}
+                      </h3>
+                    </div>
+
+                    <p className="text-xs text-slate-600 dark:text-slate-400 mb-5 leading-relaxed">
+                      {meta.desc}
+                    </p>
+
+                    {/* Skill items with full information visible (no truncation) */}
+                    <div className="space-y-3">
+                      {items.map((skill) => (
+                        <div
+                          key={skill.name}
+                          className="rounded-xl bg-slate-100/90 dark:bg-[#020b17]/80 border border-slate-300/80 dark:border-white/[0.05] p-3 hover:border-cyan-600 dark:hover:border-cyan-500/30 hover:bg-cyan-50/50 dark:hover:bg-cyan-950/20 transition-all flex flex-col justify-between"
+                        >
+                          {/* Title & Brand Icon Header */}
+                          <div className="flex items-center justify-between gap-2 mb-2">
+                            <span className="font-bold text-xs sm:text-sm text-slate-950 dark:text-slate-100">
+                              {skill.name}
+                            </span>
+                            <div className="shrink-0 p-1.5 rounded-md bg-white dark:bg-white/[0.06] shadow-sm border border-slate-200 dark:border-white/[0.08]">
+                              <TechIcon name={skill.name} className="h-4 w-4" />
                             </div>
-                        </AnimatedSection>
-                    ))}
+                          </div>
+
+                          {/* Full Detail Badges - 100% visible without any ellipsis */}
+                          <div className="flex flex-wrap gap-1.5 pt-1">
+                            {skill.detail.split(',').map((tag) => (
+                              <span
+                                key={tag.trim()}
+                                className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-mono bg-white dark:bg-white/[0.04] text-slate-700 dark:text-slate-300 border border-slate-300/80 dark:border-white/[0.06] font-medium leading-tight"
+                              >
+                                {tag.trim()}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-            </div>
-        </section>
-    );
+              </AnimatedSection>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
 }
