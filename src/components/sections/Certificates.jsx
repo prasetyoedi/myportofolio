@@ -4,358 +4,293 @@ import { Document, Page, pdfjs } from 'react-pdf';
 import { AnimatedSection } from '../AnimatedSection';
 import { data } from '../../data';
 import {
-    Award,
-    X,
-    ExternalLink,
-    FileText,
-    Loader2,
-    ZoomIn,
-    ZoomOut,
-    RotateCcw,
-    Download,
-    ChevronLeft,
-    ChevronRight,
-    Printer,
-    Maximize2,
-    Minimize2,
+  X,
+  ExternalLink,
+  FileText,
+  Loader2,
+  ZoomIn,
+  ZoomOut,
+  Download,
+  ChevronLeft,
+  ChevronRight,
+  Trophy,
+  ShieldCheck,
 } from 'lucide-react';
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-    'pdfjs-dist/build/pdf.worker.min.mjs',
-    import.meta.url
+  'pdfjs-dist/build/pdf.worker.min.mjs',
+  import.meta.url
 ).toString();
 
 export default function Certificates() {
-    const [selectedCert, setSelectedCert] = useState(null);
-    const [numPages, setNumPages] = useState(null);
-    const [pageNumber, setPageNumber] = useState(1);
-    const [zoomLevel, setZoomLevel] = useState(1.0);
-    const [isFullscreen, setIsFullscreen] = useState(false);
+  const [selectedCert, setSelectedCert] = useState(null);
+  const [numPages, setNumPages] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
+  const [zoomLevel, setZoomLevel] = useState(1.0);
 
-    const openLightbox = (cert) => {
-        setSelectedCert(cert);
-        setZoomLevel(1.0);
-        setPageNumber(1);
-        document.body.style.overflow = 'hidden';
-    };
+  const openLightbox = (cert) => {
+    setSelectedCert(cert);
+    setZoomLevel(1.0);
+    setPageNumber(1);
+    document.body.style.overflow = 'hidden';
+  };
 
-    const closeLightbox = () => {
-        setSelectedCert(null);
-        document.body.style.overflow = '';
-        setNumPages(null);
-        setPageNumber(1);
-        setZoomLevel(1.0);
-        if (isFullscreen) {
-            document.exitFullscreen?.();
-            setIsFullscreen(false);
-        }
-    };
+  const closeLightbox = () => {
+    setSelectedCert(null);
+    document.body.style.overflow = '';
+    setNumPages(null);
+    setPageNumber(1);
+  };
 
-    const onDocumentLoadSuccess = ({ numPages }) => {
-        setNumPages(numPages);
-        setPageNumber(1);
-    };
+  const onDocumentLoadSuccess = ({ numPages }) => {
+    setNumPages(numPages);
+    setPageNumber(1);
+  };
 
-    const goToPrevPage = () => {
-        setPageNumber((prev) => Math.max(prev - 1, 1));
-    };
+  return (
+    <>
+      <section
+        id="credentials"
+        className="py-24 px-5 relative overflow-hidden"
+        style={{
+          background: 'var(--ocean-credentials)',
+        }}
+      >
+        <div className="max-w-6xl mx-auto">
+          {/* Section Header */}
+          <AnimatedSection>
+            <div className="text-center max-w-2xl mx-auto mb-16">
+              <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-slate-950 dark:text-white">
+                Honors, Awards &amp; Certifications
+              </h2>
+              <p className="mt-3 text-sm sm:text-base text-slate-700 dark:text-slate-400">
+                Nationally verified competencies by BNSP and ministry-level achievements at PIMNAS.
+              </p>
+            </div>
+          </AnimatedSection>
 
-    const goToNextPage = () => {
-        setPageNumber((prev) => Math.min(prev + 1, numPages || 1));
-    };
+          {/* National Awards Showcase */}
+          <div className="mb-14">
+            <h3 className="font-mono text-xs uppercase tracking-[0.14em] text-cyan-800 dark:text-cyan-400 font-bold mb-6 flex items-center gap-2">
+              <Trophy size={16} />
+              <span>National Competition Awards</span>
+            </h3>
 
-    const handleZoomIn = () => {
-        setZoomLevel((prev) => Math.min(prev + 0.15, 2.5));
-    };
-
-    const handleZoomOut = () => {
-        setZoomLevel((prev) => Math.max(prev - 0.15, 0.5));
-    };
-
-    const handleResetZoom = () => {
-        setZoomLevel(1.0);
-    };
-
-    const handleDownload = () => {
-        if (selectedCert?.pdf) {
-            const link = document.createElement('a');
-            link.href = selectedCert.pdf;
-            link.download = `${selectedCert.name.replace(/\s+/g, '_')}.pdf`;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-    };
-
-    const handlePrint = () => {
-        if (selectedCert?.pdf) {
-            window.open(selectedCert.pdf, '_blank')?.print();
-        }
-    };
-
-    const toggleFullscreen = () => {
-        if (!document.fullscreenElement) {
-            document.documentElement.requestFullscreen?.();
-            setIsFullscreen(true);
-        } else {
-            document.exitFullscreen?.();
-            setIsFullscreen(false);
-        }
-    };
-
-    const getPageWidth = () => {
-        const baseWidth = Math.min(700, window.innerWidth - 80);
-        return baseWidth * zoomLevel;
-    };
-
-    return (
-        <>
-            <section id="certificates" className="py-24 px-5 border-y border-[var(--glass-border)] relative overflow-hidden">
-                <div className="absolute inset-0 pointer-events-none">
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-blue-500/5 blur-3xl" />
-                </div>
-
-                <div className="max-w-5xl mx-auto relative z-10">
-                    <AnimatedSection>
-                        <h2 className="section-title gradient-text text-center">Certifications</h2>
-                        <p className="text-center text-[var(--text-muted)] mb-10 max-w-2xl mx-auto">
-                            Professional certifications that validate my skills and expertise.
-                        </p>
-                    </AnimatedSection>
-
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {data.certifications.map((cert, idx) => (
-                            <AnimatedSection key={idx} delay={idx * 80}>
-                                <div
-                                    className="glass rounded-2xl overflow-hidden border border-[var(--glass-border)] hover:border-blue-500/30 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_16px_48px_-12px_rgba(59,130,246,0.15)] cursor-pointer group"
-                                    onClick={() => cert.pdf && openLightbox(cert)}
-                                >
-                                    <div className="relative aspect-[4/3] overflow-hidden bg-[var(--glass-bg)] flex items-center justify-center">
-                                        {cert.pdf ? (
-                                            <>
-                                                <Document
-                                                    file={cert.pdf}
-                                                    loading={
-                                                        <div className="flex flex-col items-center gap-2 text-[var(--text-muted)]">
-                                                            <Loader2 size={32} className="animate-spin text-blue-400" />
-                                                            <span className="text-xs">Loading PDF...</span>
-                                                        </div>
-                                                    }
-                                                    error={
-                                                        <div className="flex flex-col items-center gap-2 text-[var(--text-muted)]">
-                                                            <FileText size={32} className="text-red-400" />
-                                                            <span className="text-xs">Failed to load</span>
-                                                        </div>
-                                                    }
-                                                >
-                                                    <Page
-                                                        pageNumber={1}
-                                                        width={300}
-                                                        renderTextLayer={false}
-                                                        renderAnnotationLayer={false}
-                                                        className="transition-transform duration-500 group-hover:scale-105"
-                                                    />
-                                                </Document>
-
-                                                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                                    <div className="p-3 rounded-full glass text-white">
-                                                        <ExternalLink size={24} />
-                                                    </div>
-                                                </div>
-
-                                                <div className="absolute bottom-2 right-2 z-10">
-                                                    <span className="text-[8px] uppercase tracking-wider px-2 py-1 rounded-full bg-red-500/80 text-white border border-white/20 flex items-center gap-1">
-                                                        <FileText size={10} /> PDF
-                                                    </span>
-                                                </div>
-                                            </>
-                                        ) : (
-                                            <div className="flex flex-col items-center gap-2 text-[var(--text-muted)]">
-                                                <Award size={40} className="text-blue-400/30" />
-                                                <span className="text-xs">No PDF</span>
-                                            </div>
-                                        )}
-                                    </div>
-
-                                    <div className="p-5">
-                                        <h4 className="font-semibold text-[var(--text-white)] text-sm leading-tight line-clamp-2">
-                                            {cert.name}
-                                        </h4>
-                                        <p className="text-xs text-[var(--text-muted)] mt-1">{cert.issuer}</p>
-                                        <div className="flex items-center justify-between mt-3">
-                                            <span className="text-xs text-blue-400 font-medium px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20">
-                                                {cert.year}
-                                            </span>
-                                            {cert.pdf && (
-                                                <span className="text-xs text-[var(--text-muted)] flex items-center gap-1">
-                                                    Click to view <ExternalLink size={12} />
-                                                </span>
-                                            )}
-                                        </div>
-                                    </div>
-                                </div>
-                            </AnimatedSection>
-                        ))}
+            <div className="grid sm:grid-cols-3 gap-5">
+              {data.achievements.map((ach, idx) => (
+                <AnimatedSection key={ach.title} delay={idx * 80}>
+                  <div
+                    onClick={() => ach.pdf && openLightbox({ name: ach.title, issuer: ach.issuer, year: ach.year, pdf: ach.pdf })}
+                    className={`ocean-card p-6 rounded-2xl h-full flex flex-col justify-between ${
+                      ach.pdf ? 'cursor-pointer hover:border-cyan-600 dark:hover:border-cyan-500/40' : ''
+                    }`}
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-3">
+                        <span className="text-2xl">
+                          {idx === 0 ? '🥈' : idx === 1 ? '🥇' : '🥉'}
+                        </span>
+                        <span className="font-mono text-[10px] px-2.5 py-0.5 rounded-full bg-cyan-100 dark:bg-cyan-500/10 text-cyan-900 dark:text-cyan-300 border border-cyan-300 dark:border-cyan-500/25 font-bold">
+                          {ach.year}
+                        </span>
+                      </div>
+                      <h4 className="font-display font-bold text-slate-950 dark:text-white text-sm mb-1">
+                        {ach.title}
+                      </h4>
+                      <p className="text-xs text-cyan-800 dark:text-cyan-400 font-mono mb-2 font-medium">
+                        {ach.event}
+                      </p>
+                      <p className="text-xs text-slate-700 dark:text-slate-400">
+                        {ach.issuer}
+                      </p>
                     </div>
+
+                    {ach.pdf && (
+                      <div className="mt-4 pt-3 border-t border-slate-200 dark:border-white/[0.06] flex items-center justify-between text-[11px] font-mono text-cyan-800 dark:text-cyan-400 font-bold">
+                        <span>View Certificate</span>
+                        <ExternalLink size={12} />
+                      </div>
+                    )}
+                  </div>
+                </AnimatedSection>
+              ))}
+            </div>
+          </div>
+
+          {/* BNSP & Industry Certifications */}
+          <div>
+            <h3 className="font-mono text-xs uppercase tracking-[0.14em] text-teal-800 dark:text-teal-400 font-bold mb-6 flex items-center gap-2">
+              <ShieldCheck size={16} />
+              <span>BNSP &amp; Professional Certifications</span>
+            </h3>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {data.certifications.map((cert, idx) => (
+                <AnimatedSection key={cert.id} delay={idx * 60}>
+                  <div
+                    onClick={() => cert.pdf && openLightbox({ name: cert.title, issuer: cert.issuer, year: cert.period, pdf: cert.pdf })}
+                    className="ocean-card p-5 rounded-2xl flex flex-col justify-between h-full cursor-pointer hover:border-teal-600 dark:hover:border-teal-500/40 transition-all group"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between gap-2 mb-2">
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-white/[0.04] text-slate-700 dark:text-slate-400 border border-slate-300 dark:border-white/[0.06] font-semibold">
+                          {cert.id}
+                        </span>
+                        <span className="font-mono text-[10px] text-teal-800 dark:text-teal-300 font-bold">
+                          {cert.period}
+                        </span>
+                      </div>
+
+                      <h4 className="font-display font-bold text-slate-950 dark:text-white text-sm group-hover:text-cyan-700 dark:group-hover:text-cyan-300 transition-colors line-clamp-2">
+                        {cert.title}
+                      </h4>
+                      <p className="text-xs text-slate-700 dark:text-slate-400 mt-1">
+                        {cert.issuer}
+                      </p>
+                    </div>
+
+                    <div className="mt-4 pt-3 border-t border-slate-200 dark:border-white/[0.06] flex items-center justify-between text-[11px] font-mono text-slate-700 dark:text-slate-400 group-hover:text-cyan-700 dark:group-hover:text-cyan-400 transition-colors font-medium">
+                      <span className="flex items-center gap-1.5">
+                        <FileText size={13} />
+                        <span>Inspect PDF</span>
+                      </span>
+                      <ExternalLink size={12} />
+                    </div>
+                  </div>
+                </AnimatedSection>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Lightbox PDF Viewer */}
+      <AnimatePresence>
+        {selectedCert && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[999] flex items-center justify-center p-3 sm:p-5"
+            style={{
+              background: 'rgba(0, 5, 12, 0.85)',
+              backdropFilter: 'blur(20px)',
+            }}
+            onClick={closeLightbox}
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 20 }}
+              transition={{ duration: 0.25 }}
+              className="relative max-w-4xl w-full max-h-[92vh] rounded-2xl overflow-hidden flex flex-col bg-white dark:bg-[#020b17] border border-slate-300 dark:border-cyan-500/25 shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Header */}
+              <div className="flex items-center justify-between p-3.5 bg-slate-100 dark:bg-[#031122] border-b border-slate-300 dark:border-cyan-500/15">
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <FileText size={18} className="text-cyan-700 dark:text-cyan-400 shrink-0" />
+                  <span className="text-sm font-bold text-slate-950 dark:text-white truncate">
+                    {selectedCert.name}
+                  </span>
+                  <span className="text-xs font-mono text-slate-600 dark:text-slate-400 hidden sm:inline">
+                    · {selectedCert.issuer} ({selectedCert.year})
+                  </span>
                 </div>
-            </section>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={closeLightbox}
+                    className="p-1.5 rounded-lg hover:bg-slate-200 dark:hover:bg-white/[0.08] text-slate-700 dark:text-slate-400 hover:text-slate-950 dark:hover:text-white transition-colors"
+                  >
+                    <X size={18} />
+                  </button>
+                </div>
+              </div>
 
-            {/* ===== LIGHTBOX PDF ===== */}
-            <AnimatePresence>
-                {selectedCert && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-[999] flex items-center justify-center p-4"
-                        style={{
-                            background: 'rgba(0,0,0,0.7)',
-                            backdropFilter: 'blur(20px)',
-                        }}
-                        onClick={closeLightbox}
-                    >
-                        <motion.div
-                            initial={{ scale: 0.8, opacity: 0, y: 30 }}
-                            animate={{ scale: 1, opacity: 1, y: 0 }}
-                            exit={{ scale: 0.8, opacity: 0, y: 30 }}
-                            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-                            className="relative max-w-4xl w-full max-h-[90vh] rounded-2xl overflow-hidden flex flex-col"
-                            style={{
-                                background: 'var(--bg-body)',
-                                border: '1px solid var(--glass-border)',
-                            }}
-                            onClick={(e) => e.stopPropagation()}
-                        >
-                            {/* Header */}
-                            <div className="flex-shrink-0 flex items-center justify-between p-3 glass border-b border-[var(--glass-border)]">
-                                <div className="flex items-center gap-3 min-w-0">
-                                    <FileText size={18} className="text-blue-400 flex-shrink-0" />
-                                    <span className="text-sm font-medium text-[var(--text-white)] truncate">
-                                        {selectedCert.name}
-                                    </span>
-                                    <span className="text-xs text-[var(--text-muted)] hidden sm:inline">
-                                        {selectedCert.issuer} · {selectedCert.year}
-                                    </span>
-                                </div>
-                                <button
-                                    onClick={closeLightbox}
-                                    className="p-1.5 rounded-lg hover:bg-[var(--glass-bg)] transition-colors text-[var(--text-muted)] hover:text-[var(--text-white)] flex-shrink-0"
-                                >
-                                    <X size={20} />
-                                </button>
-                            </div>
-
-                            {/* PDF Viewer */}
-                            <div className="flex-1 overflow-y-auto p-4 scrollbar-thin scrollbar-thumb-blue-500/30 scrollbar-track-transparent">
-                                <div className="flex flex-col items-center gap-4">
-                                    {selectedCert.pdf && (
-                                        <Document
-                                            file={selectedCert.pdf}
-                                            onLoadSuccess={onDocumentLoadSuccess}
-                                            loading={
-                                                <div className="flex flex-col items-center gap-3 py-12">
-                                                    <Loader2 size={48} className="animate-spin text-blue-400" />
-                                                    <p className="text-[var(--text-muted)]">Loading PDF...</p>
-                                                </div>
-                                            }
-                                            error={
-                                                <div className="flex flex-col items-center gap-3 py-12">
-                                                    <FileText size={48} className="text-red-400" />
-                                                    <p className="text-[var(--text-muted)]">Failed to load PDF</p>
-                                                </div>
-                                            }
-                                        >
-                                            <Page
-                                                pageNumber={pageNumber}
-                                                width={getPageWidth()}
-                                                renderTextLayer={false}
-                                                renderAnnotationLayer={false}
-                                                className="shadow-2xl rounded-lg transition-all duration-300"
-                                            />
-                                        </Document>
-                                    )}
-                                </div>
-                            </div>
-
-                            {/* Toolbar */}
-                            <div className="flex-shrink-0 flex flex-wrap items-center justify-center gap-2 p-3 glass border-t border-[var(--glass-border)]">
-                                {/* Page navigation */}
-                                <div className="flex items-center gap-1">
-                                    <button
-                                        onClick={goToPrevPage}
-                                        disabled={pageNumber <= 1}
-                                        className="p-1.5 rounded-lg hover:bg-[var(--glass-bg)] transition-colors text-[var(--text-muted)] hover:text-[var(--text-white)] disabled:opacity-30 disabled:cursor-not-allowed"
-                                    >
-                                        <ChevronLeft size={18} />
-                                    </button>
-                                    <span className="text-xs text-[var(--text-muted)] min-w-[70px] text-center font-medium">
-                                        {numPages ? `${pageNumber} / ${numPages}` : 'Loading...'}
-                                    </span>
-                                    <button
-                                        onClick={goToNextPage}
-                                        disabled={pageNumber >= numPages}
-                                        className="p-1.5 rounded-lg hover:bg-[var(--glass-bg)] transition-colors text-[var(--text-muted)] hover:text-[var(--text-white)] disabled:opacity-30 disabled:cursor-not-allowed"
-                                    >
-                                        <ChevronRight size={18} />
-                                    </button>
-                                </div>
-
-                                <div className="w-px h-6 bg-[var(--glass-border)] hidden sm:block" />
-
-                                {/* Zoom controls */}
-                                <div className="flex items-center gap-1">
-                                    <button
-                                        onClick={handleZoomOut}
-                                        className="p-1.5 rounded-lg hover:bg-[var(--glass-bg)] transition-colors text-[var(--text-muted)] hover:text-[var(--text-white)]"
-                                    >
-                                        <ZoomOut size={16} />
-                                    </button>
-                                    <span className="text-xs text-[var(--text-muted)] min-w-[40px] text-center font-medium">
-                                        {Math.round(zoomLevel * 100)}%
-                                    </span>
-                                    <button
-                                        onClick={handleZoomIn}
-                                        className="p-1.5 rounded-lg hover:bg-[var(--glass-bg)] transition-colors text-[var(--text-muted)] hover:text-[var(--text-white)]"
-                                    >
-                                        <ZoomIn size={16} />
-                                    </button>
-                                    <button
-                                        onClick={handleResetZoom}
-                                        className="p-1.5 rounded-lg hover:bg-[var(--glass-bg)] transition-colors text-[var(--text-muted)] hover:text-[var(--text-white)]"
-                                    >
-                                        <RotateCcw size={14} />
-                                    </button>
-                                </div>
-
-                                <div className="w-px h-6 bg-[var(--glass-border)] hidden sm:block" />
-
-                                {/* Action buttons */}
-                                <div className="flex items-center gap-1">
-                                    <button
-                                        onClick={handlePrint}
-                                        className="p-1.5 rounded-lg hover:bg-[var(--glass-bg)] transition-colors text-[var(--text-muted)] hover:text-[var(--text-white)]"
-                                    >
-                                        <Printer size={16} />
-                                    </button>
-                                    <button
-                                        onClick={toggleFullscreen}
-                                        className="p-1.5 rounded-lg hover:bg-[var(--glass-bg)] transition-colors text-[var(--text-muted)] hover:text-[var(--text-white)]"
-                                    >
-                                        {isFullscreen ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
-                                    </button>
-                                    <button
-                                        onClick={handleDownload}
-                                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-500/20 text-blue-400 hover:bg-blue-500/30 transition-colors text-xs font-medium"
-                                    >
-                                        <Download size={14} />
-                                        Download
-                                    </button>
-                                </div>
-                            </div>
-                        </motion.div>
-                    </motion.div>
+              {/* PDF Document Container */}
+              <div className="flex-1 overflow-y-auto p-4 flex flex-col items-center bg-slate-100 dark:bg-[#010610]">
+                {selectedCert.pdf && (
+                  <Document
+                    file={selectedCert.pdf}
+                    onLoadSuccess={onDocumentLoadSuccess}
+                    loading={
+                      <div className="flex flex-col items-center gap-3 py-20 text-slate-600">
+                        <Loader2 size={36} className="animate-spin text-cyan-600" />
+                        <span className="text-xs font-mono">Loading credential...</span>
+                      </div>
+                    }
+                    error={
+                      <div className="py-20 text-center text-rose-600 text-xs font-mono">
+                        Failed to render document preview.
+                      </div>
+                    }
+                  >
+                    <Page
+                      pageNumber={pageNumber}
+                      scale={zoomLevel}
+                      width={Math.min(window.innerWidth - 60, 720)}
+                      renderTextLayer={false}
+                      renderAnnotationLayer={false}
+                      className="rounded-lg shadow-xl overflow-hidden"
+                    />
+                  </Document>
                 )}
-            </AnimatePresence>
-        </>
-    );
+              </div>
+
+              {/* Footer Controls */}
+              <div className="flex items-center justify-between p-3 bg-slate-100 dark:bg-[#031122] border-t border-slate-300 dark:border-cyan-500/15 font-mono text-xs">
+                {/* Page Navigation */}
+                <div className="flex items-center gap-1">
+                  <button
+                    onClick={() => setPageNumber((p) => Math.max(1, p - 1))}
+                    disabled={pageNumber <= 1}
+                    className="p-1 rounded hover:bg-slate-200 dark:hover:bg-white/[0.06] disabled:opacity-30 text-slate-800 dark:text-slate-300 font-bold"
+                  >
+                    <ChevronLeft size={16} />
+                  </button>
+                  <span className="text-slate-700 dark:text-slate-400 min-w-[60px] text-center font-medium">
+                    {pageNumber} / {numPages || 1}
+                  </span>
+                  <button
+                    onClick={() => setPageNumber((p) => Math.min(numPages || 1, p + 1))}
+                    disabled={pageNumber >= (numPages || 1)}
+                    className="p-1 rounded hover:bg-slate-200 dark:hover:bg-white/[0.06] disabled:opacity-30 text-slate-800 dark:text-slate-300 font-bold"
+                  >
+                    <ChevronRight size={16} />
+                  </button>
+                </div>
+
+                {/* Zoom Controls */}
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => setZoomLevel((z) => Math.max(0.6, z - 0.15))}
+                    className="p-1 rounded hover:bg-slate-200 dark:hover:bg-white/[0.06] text-slate-800 dark:text-slate-300"
+                  >
+                    <ZoomOut size={16} />
+                  </button>
+                  <span className="text-slate-700 dark:text-slate-400 font-bold">{Math.round(zoomLevel * 100)}%</span>
+                  <button
+                    onClick={() => setZoomLevel((z) => Math.min(2.0, z + 0.15))}
+                    className="p-1 rounded hover:bg-slate-200 dark:hover:bg-white/[0.06] text-slate-800 dark:text-slate-300"
+                  >
+                    <ZoomIn size={16} />
+                  </button>
+                </div>
+
+                {/* Direct Download */}
+                <a
+                  href={selectedCert.pdf}
+                  download
+                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-cyan-600 dark:bg-cyan-500/15 text-white dark:text-cyan-300 border border-transparent dark:border-cyan-500/30 hover:bg-cyan-700 dark:hover:bg-cyan-500/25 transition-colors font-semibold"
+                >
+                  <Download size={13} />
+                  <span className="hidden sm:inline">Download PDF</span>
+                </a>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
 }

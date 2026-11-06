@@ -1,151 +1,98 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import { AnimatedSection } from '../AnimatedSection';
 import { data } from '../../data';
-import { Briefcase, MapPin } from 'lucide-react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
+import { Calendar, MapPin } from 'lucide-react';
 
 export default function Experience() {
-    const timelineRef = useRef(null);
-    const itemsRef = useRef([]);
+  return (
+    <section
+      id="experience"
+      className="py-24 px-5 relative overflow-hidden"
+      style={{
+        background: 'var(--ocean-experience)',
+      }}
+    >
+      <div className="max-w-4xl mx-auto">
+        <AnimatedSection>
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-slate-950 dark:text-white">
+              Professional Engineering Experience
+            </h2>
+            <p className="mt-3 text-sm sm:text-base text-slate-700 dark:text-slate-400">
+              Hands-on enterprise systems development, production microservices, and workflow automation.
+            </p>
+          </div>
+        </AnimatedSection>
 
-    useEffect(() => {
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: timelineRef.current,
-                start: 'top 80%',
-                end: 'bottom 20%',
-                scrub: 1.5,
-            },
-        });
-
-        tl.fromTo(
-            timelineRef.current,
-            { height: '0%' },
-            { height: '100%', duration: 2, ease: 'power2.inOut' }
-        );
-
-        itemsRef.current.forEach((item, index) => {
-            if (item) {
-                gsap.fromTo(
-                    item,
-                    { opacity: 0, y: 50, scale: 0.95 },
-                    {
-                        opacity: 1,
-                        y: 0,
-                        scale: 1,
-                        duration: 0.8,
-                        delay: index * 0.15,
-                        scrollTrigger: {
-                            trigger: item,
-                            start: 'top 85%',
-                            toggleActions: 'play none none reverse',
-                        },
-                    }
-                );
-            }
-        });
-
-        return () => {
-            ScrollTrigger.getAll().forEach((st) => st.kill());
-        };
-    }, []);
-
-    return (
-        <section id="experience" className="py-24 px-5 relative overflow-hidden">
-            <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-purple-500/5 blur-3xl" />
-            </div>
-
-            <div className="max-w-4xl mx-auto relative z-10">
-                <AnimatedSection>
-                    <h2 className="section-title gradient-text text-center">Experience</h2>
-                    <p className="text-center text-[var(--text-muted)] mb-12 max-w-2xl mx-auto">
-                        My professional journey in software engineering and full-stack development.
-                    </p>
-                </AnimatedSection>
-
-                <div className="relative">
-                    <div
-                        ref={timelineRef}
-                        className="absolute left-[19px] sm:left-1/2 top-0 bottom-0 w-[3px] rounded-full"
-                        style={{
-                            background: 'linear-gradient(to bottom, #3b82f6, #60a5fa, #93c5fd, rgba(59,130,246,0.05))',
-                            transform: 'translateX(-50%)',
-                            boxShadow: '0 0 20px rgba(59, 130, 246, 0.3)',
-                            height: '0%',
-                            transformOrigin: 'top',
-                        }}
-                    />
-
-                    <div className="space-y-12">
-                        {data.experience.map((exp, idx) => {
-                            const isEven = idx % 2 === 0;
-                            return (
-                                <div
-                                    key={idx}
-                                    ref={(el) => (itemsRef.current[idx] = el)}
-                                    className={`relative flex flex-col sm:flex-row gap-6 sm:gap-8 ${isEven ? 'sm:flex-row' : 'sm:flex-row-reverse'
-                                        }`}
-                                >
-                                    <div className="absolute left-[19px] sm:left-1/2 top-1 -translate-x-1/2 z-20">
-                                        <div className="relative">
-                                            <div className="w-5 h-5 rounded-full bg-blue-500 border-4 border-blue-500/30 shadow-[0_0_20px_rgba(59,130,246,0.4)]" />
-                                            <div className="absolute inset-0 w-5 h-5 rounded-full bg-blue-500/20 animate-ping" />
-                                        </div>
-                                    </div>
-
-                                    <div
-                                        className={`sm:w-1/2 ${isEven ? 'sm:pr-8 sm:pl-0 pl-12' : 'sm:pl-8 sm:pr-0 pl-12'
-                                            }`}
-                                    >
-                                        <div className="glass p-6 rounded-2xl card-hover border border-[var(--glass-border)] hover:border-blue-500/30 transition-all duration-300">
-                                            <div className="flex flex-wrap items-start justify-between gap-2 mb-3">
-                                                <div>
-                                                    <h3 className="text-lg font-bold text-[var(--text-white)] flex items-center gap-2">
-                                                        <Briefcase size={18} className="text-blue-400" />
-                                                        {exp.role}
-                                                    </h3>
-                                                    <p className="text-blue-400 font-medium text-sm mt-0.5">
-                                                        {exp.company}
-                                                    </p>
-                                                </div>
-                                                <span className="text-xs px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 whitespace-nowrap">
-                                                    {exp.period}
-                                                </span>
-                                            </div>
-
-                                            <div className="flex items-center gap-2 text-xs text-[var(--text-muted)] mb-3">
-                                                <MapPin size={14} />
-                                                <span>{exp.location}</span>
-                                            </div>
-
-                                            <p className="text-[var(--text-muted)] text-sm leading-relaxed">
-                                                {exp.description}
-                                            </p>
-
-                                            <div className="flex flex-wrap gap-1.5 mt-4 pt-3 border-t border-[var(--glass-border)]">
-                                                {exp.tech.map((t) => (
-                                                    <span
-                                                        key={t}
-                                                        className="text-[10px] px-2.5 py-1 rounded-full bg-[var(--tag-bg)] text-[var(--text-muted)] border border-[var(--tag-border)] hover:border-blue-500/30 transition-colors"
-                                                    >
-                                                        {t}
-                                                    </span>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="hidden sm:block sm:w-1/2" />
-                                </div>
-                            );
-                        })}
-                    </div>
+        {/* Timeline Container */}
+        <div className="relative border-l border-cyan-600/40 dark:border-cyan-500/25 ml-3 sm:ml-6 pl-6 sm:pl-8 space-y-12">
+          {data.experience.map((exp, idx) => (
+            <AnimatedSection key={`${exp.company}-${exp.role}`} delay={idx * 100}>
+              <div className="relative group">
+                {/* Node on Timeline */}
+                <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 flex items-center justify-center">
+                  <div className="h-4 w-4 rounded-full bg-white dark:bg-[#020813] border-2 border-cyan-600 dark:border-cyan-500 flex items-center justify-center shadow-[0_0_10px_rgba(6,182,212,0.5)]">
+                    <div className="h-1.5 w-1.5 rounded-full bg-cyan-600 dark:bg-cyan-500" />
+                  </div>
                 </div>
-            </div>
-        </section>
-    );
+
+                {/* Experience Card */}
+                <div className="ocean-card p-6 sm:p-7 rounded-2xl">
+                  {/* Top Bar: Company & Role */}
+                  <div className="flex flex-wrap items-start justify-between gap-2 pb-4 mb-4 border-b border-slate-200 dark:border-white/[0.06]">
+                    <div>
+                      <h3 className="font-display text-lg sm:text-xl font-bold text-slate-950 dark:text-white group-hover:text-cyan-700 dark:group-hover:text-cyan-300 transition-colors">
+                        {exp.role}
+                      </h3>
+                      <p className="text-cyan-800 dark:text-cyan-400 font-bold text-sm mt-0.5 font-mono">
+                        {exp.company}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col sm:items-end gap-1">
+                      <span className="inline-flex items-center gap-1.5 font-mono text-xs text-slate-800 dark:text-slate-300 bg-slate-100 dark:bg-white/[0.05] px-2.5 py-1 rounded-full border border-slate-300 dark:border-white/[0.08] font-medium">
+                        <Calendar size={12} className="text-cyan-700 dark:text-cyan-400" />
+                        {exp.period}
+                      </span>
+                      <span className="text-[11px] text-slate-600 dark:text-slate-400 flex items-center gap-1 font-mono">
+                        <MapPin size={11} />
+                        {exp.location} · {exp.type}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Context Description */}
+                  <p className="text-sm text-slate-800 dark:text-slate-300 leading-relaxed font-sans mb-4">
+                    {exp.description}
+                  </p>
+
+                  {/* Engineering Highlights */}
+                  <ul className="space-y-2 mb-5">
+                    {exp.highlights.map((point) => (
+                      <li key={point.slice(0, 30)} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 dark:text-slate-300/90 leading-relaxed">
+                        <span className="h-1.5 w-1.5 rounded-full bg-cyan-600 dark:bg-cyan-400 mt-2 shrink-0 shadow-[0_0_6px_#06b6d4]" />
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* Tech Stack Pills */}
+                  <div className="pt-4 border-t border-slate-200 dark:border-white/[0.06] flex flex-wrap gap-1.5">
+                    {exp.tech.map((t) => (
+                      <span
+                        key={t}
+                        className="text-[11px] font-mono px-2.5 py-1 rounded-md bg-cyan-100/80 dark:bg-cyan-950/40 text-cyan-900 dark:text-cyan-200 border border-cyan-300 dark:border-cyan-500/20 font-medium"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </AnimatedSection>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }
