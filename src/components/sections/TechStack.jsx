@@ -97,7 +97,7 @@ export default function TechStack() {
                       {items.map((skill) => (
                         <div
                           key={skill.name}
-                          className="rounded-xl bg-slate-100/90 dark:bg-[#020b17]/80 border border-slate-300/80 dark:border-white/[0.05] p-3 hover:border-cyan-600 dark:hover:border-cyan-500/30 hover:bg-cyan-50/50 dark:hover:bg-cyan-950/20 transition-all flex flex-col justify-between"
+                          className="rounded-xl bg-slate-50 dark:bg-[#020b17]/80 border border-slate-200 dark:border-white/[0.05] p-3 hover:border-cyan-600 dark:hover:border-cyan-500/30 hover:bg-cyan-50/50 dark:hover:bg-cyan-950/20 transition-all flex flex-col justify-between"
                         >
                           {/* Title & Brand Icon Header */}
                           <div className="flex items-center justify-between gap-2 mb-2">
@@ -114,7 +114,7 @@ export default function TechStack() {
                             {skill.detail.split(',').map((tag) => (
                               <span
                                 key={tag.trim()}
-                                className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-mono bg-white dark:bg-white/[0.04] text-slate-700 dark:text-slate-300 border border-slate-300/80 dark:border-white/[0.06] font-medium leading-tight"
+                                className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-mono bg-white dark:bg-white/[0.04] text-slate-800 dark:text-slate-300 border border-slate-200 dark:border-white/[0.06] font-medium leading-tight"
                               >
                                 {tag.trim()}
                               </span>

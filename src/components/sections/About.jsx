@@ -90,7 +90,7 @@ export default function About() {
                         </div>
                       )}
                       {edu.finalProject && (
-                        <div className="mt-2.5 rounded-lg bg-slate-100/90 dark:bg-black/30 border border-slate-300 dark:border-white/[0.06] p-2.5 text-[11px] text-slate-800 dark:text-slate-300 leading-relaxed">
+                        <div className="mt-2.5 rounded-lg bg-slate-50 dark:bg-black/30 border border-slate-200 dark:border-white/[0.06] p-2.5 text-[11px] text-slate-800 dark:text-slate-300 leading-relaxed">
                           <span className="font-mono text-cyan-800 dark:text-cyan-400 block mb-0.5 font-bold">Final Capstone:</span>
                           {edu.finalProject}
                         </div>
@@ -100,7 +100,7 @@ export default function About() {
                           {edu.courses.map((course) => (
                             <span
                               key={course}
-                              className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-white/[0.04] text-slate-700 dark:text-slate-400 border border-slate-300 dark:border-white/[0.05]"
+                              className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-50 dark:bg-white/[0.04] text-slate-700 dark:text-slate-400 border border-slate-200 dark:border-white/[0.05]"
                             >
                               {course}
                             </span>

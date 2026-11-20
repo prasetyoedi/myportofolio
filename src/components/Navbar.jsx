@@ -114,6 +114,17 @@ export const Navbar = () => {
             </button>
 
             <a
+              href="/portfolio_pdf.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden md:inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-mono font-bold text-slate-800 dark:text-slate-300 hover:text-cyan-700 dark:hover:text-cyan-300 hover:bg-slate-100 dark:hover:bg-slate-500/10 border border-slate-300 dark:border-white/[0.08] transition-all"
+              title="Open Printable PDF Portfolio"
+            >
+              <span>PDF</span>
+              <ArrowUpRight size={12} />
+            </a>
+
+            <a
               href="#contact"
               onClick={(e) => {
                 e.preventDefault();
