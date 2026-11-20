@@ -6,35 +6,41 @@ import {
   Server,
   Code2,
   Database,
-  Workflow,
-  Wrench,
+  Cpu,
+  Layers,
+  Terminal,
 } from 'lucide-react';
 
 const categoryMeta = {
   backend: {
-    label: 'Backend & APIs',
+    label: 'Backend & Systems',
     icon: Server,
-    desc: 'High-throughput microservices, RESTful interfaces, and OAuth security.',
+    desc: 'High-throughput Go/Gin microservices, .NET Core v8, async HTTP 202 workers, and distributed locks.',
   },
   frontend: {
     label: 'Frontend & UI Engineering',
     icon: Code2,
-    desc: 'Component-driven web apps, data-dense enterprise grids, responsive layouts.',
+    desc: 'Component-driven React/Next.js, modern Tailwind UI ecosystems, and virtualized DevExtreme grids.',
+  },
+  apis_ai: {
+    label: 'APIs, Protocols & AI',
+    icon: Cpu,
+    desc: 'Google Ads GAQL, TikTok API, OAuth 2.0, OpenAPI/Scalar, and closed-loop LLM function calling.',
   },
   database: {
-    label: 'Database Systems',
+    label: 'Databases & Caching',
     icon: Database,
-    desc: 'Relational modeling, transaction integrity, indexing, and query tuning.',
+    desc: 'PostgreSQL JSONB, MS SQL Server, MySQL, and extreme IMemoryCache tuning (9ms latency).',
   },
-  analysis: {
-    label: 'System Analysis & Design',
-    icon: Workflow,
-    desc: 'BPMN 2.0 workflow modeling, UML diagrams, requirements specifications.',
+  languages: {
+    label: 'Languages & Architecture',
+    icon: Layers,
+    desc: 'TypeScript, JavaScript ES6+, typed core languages, BPMN 2.0 workflows, and UML modeling.',
   },
-  tools: {
-    label: 'Tooling, APIs & QA',
-    icon: Wrench,
-    desc: 'Third-party integrations, performance auditing, version control pipelines.',
+  devops: {
+    label: 'DevOps, Tooling & QA',
+    icon: Terminal,
+    desc: 'Docker containers, Linux CLI, Git merge pipelines, Postman QA, and Lighthouse 99/100 audits.',
   },
 };
 
