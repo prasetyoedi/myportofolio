@@ -8,7 +8,7 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="border-t border-slate-300 dark:border-cyan-500/15 py-10 px-5 bg-slate-200/90 dark:bg-[#000104] text-slate-800 dark:text-slate-400 text-xs font-mono relative">
+    <footer className="border-t border-slate-200 dark:border-cyan-500/15 py-10 px-5 bg-slate-50 dark:bg-[#000104] text-slate-600 dark:text-slate-400 text-xs font-mono relative">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         {/* Left: Brand & Copyright */}
         <div className="flex flex-col items-center md:items-start gap-1">

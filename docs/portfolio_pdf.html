@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Prasetyo Edi Pamungkas — Executive Engineering Portfolio</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+    @page {
+      size: A4 portrait;
+      margin: 10mm 12mm;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    @media print {
+      .no-print {
+        display: none !important;
+      }
+      body {
+        background: #ffffff !important;
+        padding: 0 !important;
+      }
+      .page {
+        margin: 0 !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+      }
+    }
+
+    @media screen {
+      body {
+        background: #f1f5f9;
+        padding: 70px 16px 40px 16px;
+      }
+      .page {
+        background: #ffffff;
+        max-width: 210mm;
+        margin: 0 auto 36px auto;
+        padding: 14mm 16mm 10mm 16mm;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+      }
+      .floating-toolbar {
+        position: fixed;
+        top: 14px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: rgba(255, 255, 255, 0.98);
+        padding: 8px 18px;
+        border-radius: 999px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+        border: 1.5px solid #0284c7;
+        backdrop-filter: blur(12px);
+      }
+      .tb-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 11px;
+        font-weight: 700;
+        text-decoration: none;
+        padding: 7px 16px;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: all 0.2s;
+        border: none;
+      }
+      .tb-print {
+        background: #0284c7;
+        color: #ffffff;
+      }
+      .tb-print:hover {
+        background: #0369a1;
+      }
+      .tb-back {
+        background: #f1f5f9;
+        color: #0f172a;
+        border: 1px solid #cbd5e1;
+      }
+      .tb-back:hover {
+        background: #e2e8f0;
+      }
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      color: #0f172a;
+      background: #ffffff;
+      line-height: 1.45;
+      font-size: 11px;
+    }
+
+    .page {
+      width: 100%;
+      min-height: 275mm;
+      max-height: 275mm;
+      page-break-after: always;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-bottom: 8mm;
+    }
+
+    .page:last-child {
+      page-break-after: avoid;
+    }
+
+    .page-content {
+      flex: 1;
+    }
+
+    /* Page Header & Footer */
+    .doc-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 8px;
+      margin-bottom: 14px;
+      border-bottom: 1.5px solid #0284c7;
+    }
+
+    .doc-header .doc-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      font-weight: 700;
+      color: #0369a1;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .doc-header .doc-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5px;
+      color: #64748b;
+    }
+
+    .doc-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 8px;
+      margin-top: 12px;
+      border-top: 1px solid #e2e8f0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5px;
+      color: #64748b;
+    }
+
+    .doc-footer a {
+      color: #0284c7;
+      text-decoration: none;
+    }
+
+    /* Typography & Utilities */
+    h1 {
+      font-size: 24px;
+      font-weight: 800;
+      color: #091e42;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+
+    h2 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #0f172a;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    h3 {
+      font-size: 12px;
+      font-weight: 700;
+      color: #091e42;
+    }
+
+    .subheading {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      font-weight: 600;
+      color: #0284c7;
+      margin-top: 3px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 5px;
+      border-bottom: 1.5px solid #e2e8f0;
+      margin-bottom: 12px;
+    }
+
+    .section-title h2 {
+      margin-bottom: 0;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #0f172a;
+    }
+
+    .section-title .pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5px;
+      padding: 2px 7px;
+      background: #f0fdf4;
+      color: #166534;
+      border: 1px solid #bbf7d0;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+
+    /* Cards & Containers */
+    .card {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 10px 12px;
+      margin-bottom: 10px;
+    }
+
+    .card-highlight {
+      background: #f8fafc;
+      border: 1px solid #94a3b8;
+    }
+
+    .badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8px;
+      font-weight: 600;
+      padding: 1.5px 6px;
+      border-radius: 4px;
+      background: #f1f5f9;
+      color: #334155;
+      border: 1px solid #cbd5e1;
+      margin-right: 4px;
+      margin-bottom: 4px;
+    }
+
+    .badge-primary {
+      background: #e0f2fe;
+      color: #0369a1;
+      border-color: #bae6fd;
+    }
+
+    .badge-accent {
+      background: #f0fdf4;
+      color: #15803d;
+      border-color: #bbf7d0;
+    }
+
+    /* Key Metric Blocks */
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .metric-box {
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+      background: #f8fafc;
+    }
+
+    .metric-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 800;
+      color: #0369a1;
+      line-height: 1.2;
+    }
+
+    .metric-lbl {
+      font-size: 10px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-top: 2px;
+    }
+
+    .metric-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8px;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 1px;
+    }
+
+    /* Architecture Flow Box - PURE CLEAN LIGHT */
+    .arch-box {
+      background: #f8fafc;
+      color: #0f172a;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 10px 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8px;
+      line-height: 1.35;
+      margin: 8px 0;
+      overflow: hidden;
+      white-space: pre-wrap;
+      font-weight: 500;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .three-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+    }
+
+    ul.bullet-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    ul.bullet-list li {
+      position: relative;
+      padding-left: 12px;
+      margin-bottom: 4px;
+      font-size: 9.5px;
+      color: #334155;
+      line-height: 1.4;
+    }
+
+    ul.bullet-list li::before {
+      content: "▪";
+      position: absolute;
+      left: 0;
+      color: #0284c7;
+      font-size: 11px;
+      top: -1px;
+    }
+
+    .contact-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+      margin-bottom: 14px;
+    }
+
+    .contact-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      font-weight: 600;
+      color: #0f172a;
+      background: #f1f5f9;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid #cbd5e1;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Screen Toolbar (Hidden on Print / PDF) -->
+  <div class="no-print floating-toolbar">
+    <a href="/" class="tb-btn tb-back">⬅ Kembali ke Web</a>
+    <button onclick="window.print()" class="tb-btn tb-print">🖨️ Cetak / Simpan sebagai PDF (Ctrl + P)</button>
+  </div>
+
+  <!-- ==================== PAGE 1: COVER & EXECUTIVE PROFILE ==================== -->
+  <div class="page">
+    <div class="page-content">
+      <div class="doc-header">
+        <span class="doc-title">Executive Engineering Portfolio · Case Studies</span>
+        <span class="doc-meta">Full Stack Software Engineer & System Analyst</span>
+      </div>
+
+      <!-- Identity with Profile Headshot -->
+      <div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 14px;">
+        <div style="flex: 1;">
+          <h1>Prasetyo Edi Pamungkas</h1>
+          <div class="subheading">Full Stack Software Engineer &amp; System Analyst · UGM Cum Laude (3.85 / 4.00)</div>
+          
+          <div class="contact-pills" style="margin-top: 8px; margin-bottom: 0;">
+            <a href="mailto:prasetyoedi451@gmail.com" class="contact-pill" style="color: inherit; text-decoration: none;">📧 prasetyoedi451@gmail.com</a>
+            <a href="https://www.linkedin.com/in/prasetyo-edi-pamungkas-4426611b0/" target="_blank" class="contact-pill" style="color: inherit; text-decoration: none;">🔗 linkedin.com/in/prasetyo-edi-pamungkas</a>
+            <a href="https://github.com/prasetyoedi" target="_blank" class="contact-pill" style="color: inherit; text-decoration: none;">🐙 github.com/prasetyoedi</a>
+            <a href="https://myportofolio-iota-red.vercel.app/" target="_blank" class="contact-pill" style="color: inherit; text-decoration: none;">🌐 myportofolio-iota-red.vercel.app</a>
+            <span class="contact-pill">📍 Sleman, Yogyakarta, Indonesia</span>
+          </div>
+        </div>
+
+        <!-- Profile Photo (Formal Headshot) -->
+        <div style="flex-shrink: 0;">
+          <img src="profile.jpg" alt="Prasetyo Edi Pamungkas" style="width: 80px; height: 106px; object-fit: cover; border-radius: 8px; border: 2px solid #0284c7; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.18); display: block;" />
+        </div>
+      </div>
+
+      <!-- 3 Key Metric Cards -->
+      <div class="metric-grid">
+        <div class="metric-box">
+          <div class="metric-val">3.85 / 4.00</div>
+          <div class="metric-lbl">UGM Cum Laude</div>
+          <div class="metric-sub">Academic Achievement</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-val">Go · .NET · PHP · React · Next.js</div>
+          <div class="metric-lbl">Full Stack Technologies</div>
+          <div class="metric-sub">Technical Expertise</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-val">2× PIMNAS Medals</div>
+          <div class="metric-lbl">Gold &amp; Silver Medalist</div>
+          <div class="metric-sub">National Achievement</div>
+        </div>
+      </div>
+
+      <!-- Executive Overview -->
+      <div class="card card-highlight">
+        <div style="font-size: 11px; font-weight: 700; color: #0369a1; text-transform: uppercase; margin-bottom: 4px;">
+          Executive Technical Profile
+        </div>
+        <p style="font-size: 10px; color: #1e293b; line-height: 1.5;">
+          Full Stack Software Engineer with hands-on experience architecting enterprise web applications, high-throughput microservices, and AI-driven automation systems. Proficient across the entire software development lifecycle—from business process modeling (UML/BPMN 2.0) and scalable backend architecture (Go, C# .NET 8, PHP) to modern responsive frontends (React.js, Next.js, DevExtreme). Proven production track record cutting database query latencies by <b>99.08%</b>, streamlining enterprise workflow lifecycles by <b>54.5%</b>, and deploying financial-guardrailed AI tool calling in production.
+        </p>
+      </div>
+
+      <!-- Education & Academics -->
+      <div class="section-title">
+        <h2>Education &amp; Academic Credentials</h2>
+        <span class="pill">Verified Cum Laude</span>
+      </div>
+
+      <div class="two-col">
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div>
+              <h3 style="font-size: 11px;">Universitas Gadjah Mada (UGM)</h3>
+              <div style="color: #0369a1; font-weight: 600; font-size: 9.5px;">Bachelor of Applied Computer in Software Engineering</div>
+            </div>
+            <span class="badge badge-accent">2022 – 2026</span>
+          </div>
+          <p style="font-size: 9.5px; margin-top: 4px; color: #475569;">
+            <b>GPA: 3.85 / 4.00 (Cum Laude)</b><br/>
+            <b>Final Project:</b> Design and Development of a Web-Based Service Parts Sales Order Information System with Digital Multilevel Approval at PT Hino Motors Manufacturing Indonesia.
+          </p>
+        </div>
+
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div>
+              <h3 style="font-size: 11px;">SMK Negeri 2 Depok Sleman</h3>
+              <div style="color: #0369a1; font-weight: 600; font-size: 9.5px;">Network Informatics Systems and Applications</div>
+            </div>
+            <span class="badge">2018 – 2022</span>
+          </div>
+          <p style="font-size: 9.5px; margin-top: 4px; color: #475569;">
+            Foundational systems networking, relational database engineering, software development life cycle, and computer hardware architectures.
+          </p>
+        </div>
+      </div>
+
+      <!-- Core Production Principles -->
+      <div class="section-title" style="margin-top: 8px;">
+        <h2>Production Engineering Principles</h2>
+      </div>
+
+      <div class="three-col">
+        <div class="card" style="margin-bottom: 0;">
+          <h3 style="font-size: 10px; color: #0369a1; margin-bottom: 3px;">1. Clean Architecture</h3>
+          <p style="font-size: 9px; color: #475569;">
+            Strict domain boundary isolation, repository pattern, idempotency keys, and zero-throttle async background workers.
+          </p>
+        </div>
+        <div class="card" style="margin-bottom: 0;">
+          <h3 style="font-size: 10px; color: #0369a1; margin-bottom: 3px;">2. Extreme Caching</h3>
+          <p style="font-size: 9px; color: #475569;">
+            In-memory analytical caching (IMemoryCache) and indexed PostgreSQL JSONB slashing latencies by 99% under heavy concurrency.
+          </p>
+        </div>
+        <div class="card" style="margin-bottom: 0;">
+          <h3 style="font-size: 10px; color: #0369a1; margin-bottom: 3px;">3. Closed-Loop AI Safety</h3>
+          <p style="font-size: 9px; color: #475569;">
+            Converting LLM function calls into live mutations protected by deterministic financial guardrails and audit logs.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-footer">
+      <span>Prasetyo Edi Pamungkas · Technical Portfolio</span>
+      <span>Page 1 of 6</span>
+      <span>myportofolio-iota-red.vercel.app</span>
+    </div>
+  </div>
+
+  <!-- ==================== PAGE 2: TECH STACK & ARSENAL ==================== -->
+  <div class="page">
+    <div class="page-content">
+      <div class="doc-header">
+        <span class="doc-title">Section 01 · Technical Stack &amp; Architectural Arsenal</span>
+        <span class="doc-meta">Full Stack Software Engineer & System Analyst</span>
+      </div>
+
+      <div class="section-title">
+        <h2>Production Technical Arsenal (6 Symmetrical Categories)</h2>
+        <span class="pill">Verified Production Stack</span>
+      </div>
+
+      <p style="font-size: 9.5px; color: #475569; margin-bottom: 12px;">
+        A comprehensive breakdown of system languages, enterprise backend frameworks, modern component libraries, relational storage engines, and DevOps tooling deployed in production environments.
+      </p>
+
+      <div class="two-col">
+        <!-- 1. Backend & Systems -->
+        <div class="card">
+          <div style="font-size: 11px; font-weight: 700; color: #0369a1; margin-bottom: 6px;">
+            1. Backend &amp; Systems Architecture
+          </div>
+          <div style="margin-bottom: 6px;">
+            <div style="font-weight: 700; font-size: 9.5px;">Go (Golang)</div>
+            <div style="margin-top: 2px;">
+              <span class="badge badge-primary">Gin Gonic</span>
+              <span class="badge">Microservices</span>
+              <span class="badge">Async HTTP 202 Workers</span>
+              <span class="badge">Distributed Locks</span>
+            </div>
+          </div>
+          <div style="margin-bottom: 6px;">
+            <div style="font-weight: 700; font-size: 9.5px;">C# / .NET Core</div>
+            <div style="margin-top: 2px;">
+              <span class="badge badge-primary">.NET Core v8</span>
+              <span class="badge">Entity Framework Core</span>
+              <span class="badge">MVC</span>
+              <span class="badge">Clean Architecture</span>
+            </div>
+          </div>
+          <div>
+            <div style="font-weight: 700; font-size: 9.5px;">PHP &amp; Laravel</div>
+            <div style="margin-top: 2px;">
+              <span class="badge badge-primary">Laravel 10</span>
+              <span class="badge">CodeIgniter</span>
+              <span class="badge">Eloquent ORM</span>
+              <span class="badge">RESTful APIs</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Frontend & UI Engineering -->
+        <div class="card">
+          <div style="font-size: 11px; font-weight: 700; color: #0369a1; margin-bottom: 6px;">
+            2. Frontend &amp; UI Engineering
+          </div>
+          <div style="margin-bottom: 6px;">
+            <div style="font-weight: 700; font-size: 9.5px;">React.js &amp; Next.js</div>
+            <div style="margin-top: 2px;">
+              <span class="badge badge-primary">React 18</span>
+              <span class="badge">Next.js App Router</span>
+              <span class="badge">Zustand</span>
+              <span class="badge">Lighthouse 99/100</span>
+            </div>
+          </div>
+          <div style="margin-bottom: 6px;">
+            <div style="font-weight: 700; font-size: 9.5px;">Tailwind CSS Ecosystem</div>
+            <div style="margin-top: 2px;">
+              <span class="badge badge-primary">Preline UI</span>
+              <span class="badge">daisyUI</span>
+              <span class="badge">shadcn/ui</span>
+              <span class="badge">flowbite</span>
+            </div>
+          </div>
+          <div>
+            <div style="font-weight: 700; font-size: 9.5px;">Enterprise &amp; Legacy Frontends</div>
+            <div style="margin-top: 2px;">
+              <span class="badge badge-primary">DevExtreme / DevExpress</span>
+              <span class="badge">Bootstrap 5</span>
+              <span class="badge">jQuery</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. APIs, Protocols & AI -->
+        <div class="card">
+          <div style="font-size: 11px; font-weight: 700; color: #0369a1; margin-bottom: 6px;">
+            3. APIs, Protocols &amp; AI Automation
+          </div>
+          <div style="margin-bottom: 6px;">
+            <div style="font-weight: 700; font-size: 9.5px;">Mission-Critical APIs</div>
+            <div style="margin-top: 2px;">
+              <span class="badge badge-primary">Google Ads (v25 GAQL)</span>
+              <span class="badge">TikTok Marketing API (v1.3)</span>
+              <span class="badge">OAuth 2.0</span>
+            </div>
+          </div>
+          <div style="margin-bottom: 6px;">
+            <div style="font-weight: 700; font-size: 9.5px;">AI Function Calling &amp; Telemetry</div>
+            <div style="margin-top: 2px;">
+              <span class="badge badge-primary">LLM Tool Calling</span>
+              <span class="badge">Gemini AI API</span>
+              <span class="badge">Financial Guardrails</span>
+              <span class="badge">1-Tap AI Actions</span>
+            </div>
+          </div>
+          <div>
+            <div style="font-weight: 700; font-size: 9.5px;">API Tooling &amp; Protocols</div>
+            <div style="margin-top: 2px;">
+              <span class="badge">OpenAPI / Swagger</span>
+              <span class="badge">Scalar UI</span>
+              <span class="badge">Resilient Webhooks</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Databases & Caching -->
+        <div class="card">
+          <div style="font-size: 11px; font-weight: 700; color: #0369a1; margin-bottom: 6px;">
+            4. Databases &amp; Caching Systems
+          </div>
+          <div style="margin-bottom: 6px;">
+            <div style="font-weight: 700; font-size: 9.5px;">Relational &amp; Document Engines</div>
+            <div style="margin-top: 2px;">
+              <span class="badge badge-primary">PostgreSQL (JSONB)</span>
+              <span class="badge">Microsoft SQL Server</span>
+              <span class="badge">MySQL</span>
+            </div>
+          </div>
+          <div style="margin-bottom: 6px;">
+            <div style="font-weight: 700; font-size: 9.5px;">Extreme In-Memory Caching</div>
+            <div style="margin-top: 2px;">
+              <span class="badge badge-accent">IMemoryCache (9ms Latency)</span>
+              <span class="badge">Query Indexing</span>
+            </div>
+          </div>
+          <div>
+            <div style="font-weight: 700; font-size: 9.5px;">Migration &amp; Data Reliability</div>
+            <div style="margin-top: 2px;">
+              <span class="badge">golang-migrate</span>
+              <span class="badge">Compound Unique Keys</span>
+              <span class="badge">Transactions</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Languages & Architecture -->
+        <div class="card">
+          <div style="font-size: 11px; font-weight: 700; color: #0369a1; margin-bottom: 6px;">
+            5. Languages &amp; System Architecture
+          </div>
+          <div style="margin-bottom: 6px;">
+            <div style="font-weight: 700; font-size: 9.5px;">Core System Languages</div>
+            <div style="margin-top: 2px;">
+              <span class="badge badge-primary">Go (Golang)</span>
+              <span class="badge">C# (.NET)</span>
+              <span class="badge">PHP</span>
+              <span class="badge">TypeScript</span>
+              <span class="badge">JavaScript (ES6+)</span>
+            </div>
+          </div>
+          <div>
+            <div style="font-weight: 700; font-size: 9.5px;">Business Process &amp; System Modeling</div>
+            <div style="margin-top: 2px;">
+              <span class="badge badge-primary">BPMN 2.0 Workflows</span>
+              <span class="badge">UML (Use Case, Activity, Sequence, Swimlane)</span>
+              <span class="badge">Database ERD</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. DevOps, Tooling & QA -->
+        <div class="card">
+          <div style="font-size: 11px; font-weight: 700; color: #0369a1; margin-bottom: 6px;">
+            6. DevOps, Tooling &amp; Quality Assurance
+          </div>
+          <div style="margin-bottom: 6px;">
+            <div style="font-weight: 700; font-size: 9.5px;">Containerization &amp; OS</div>
+            <div style="margin-top: 2px;">
+              <span class="badge badge-primary">Docker</span>
+              <span class="badge">Linux CLI</span>
+              <span class="badge">Git</span>
+              <span class="badge">GitHub</span>
+              <span class="badge">GitLab</span>
+            </div>
+          </div>
+          <div>
+            <div style="font-weight: 700; font-size: 9.5px;">Testing &amp; Performance Auditing</div>
+            <div style="margin-top: 2px;">
+              <span class="badge badge-accent">Google Lighthouse 99/100</span>
+              <span class="badge">Postman Automated Tests</span>
+              <span class="badge">DBeaver</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-footer">
+      <span>Prasetyo Edi Pamungkas · Technical Portfolio</span>
+      <span>Page 2 of 6</span>
+      <span>myportofolio-iota-red.vercel.app</span>
+    </div>
+  </div>
+
+  <!-- ==================== PAGE 3: CASE STUDY 1 (PT EBYB) ==================== -->
+  <div class="page">
+    <div class="page-content">
+      <div class="doc-header">
+        <span class="doc-title">Section 02 · Production Deep-Dive Case Study 1</span>
+        <span class="doc-meta">Go (Gin) · Microservices · Closed-Loop AI · AdTech</span>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+        <div>
+          <h2>Multi-Channel Ad Management &amp; AI Metrics Engine</h2>
+          <div class="subheading">PT EbyB Global Marketplace · September 2026 – Present | Full-Time</div>
+        </div>
+        <span class="badge badge-accent" style="font-size: 9px; padding: 4px 8px;">16.5% Spend Cut · Production</span>
+      </div>
+
+      <!-- Problem vs Solution Grid -->
+      <div class="two-col" style="margin-bottom: 8px;">
+        <div class="card" style="margin-bottom: 0;">
+          <h3 style="color: #b91c1c; font-size: 10px; margin-bottom: 3px;">The Engineering Challenge</h3>
+          <p style="font-size: 9px; color: #475569; line-height: 1.4;">
+            Managing high-velocity advertising across TikTok Ads and Google Ads required constant manual intervention by media buyers, suffered from unoptimized wasted budget on irrelevant search terms, and lacked centralized telemetry due to disparate API rate-limiting rules.
+          </p>
+        </div>
+        <div class="card" style="margin-bottom: 0;">
+          <h3 style="color: #15803d; font-size: 10px; margin-bottom: 3px;">The Architectural Solution</h3>
+          <p style="font-size: 9px; color: #475569; line-height: 1.4;">
+            Architected Go (Gin) backend microservices integrating Google Ads (GAQL v25) and TikTok Marketing API (v1.3) with async worker queues, conflict-handling distributed locks, and a Closed-Loop 1-Tap AI Action engine protected by strict financial risk guardrails.
+          </p>
+        </div>
+      </div>
+
+      <!-- Production Architecture Diagram -->
+      <div style="font-weight: 700; font-size: 9.5px; color: #0f172a; margin-top: 6px;">
+        High-Throughput Production Architecture Flow:
+      </div>
+      <div class="arch-box">
+┌─────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Frontend / Media Buyers ──► [OAuth 2.0 / REST] ──► API Gateway & Auth Service (Go / Gin)                │
+└────────────────────────────────────────┬────────────────────────────────────────┬───────────────────────┘
+                                         │                                        │
+             ┌───────────────────────────┴────────────┐             ┌─────────────┴────────────────────────┐
+             ▼                                        ▼             ▼                                      ▼
+┌────────────────────────────────────────┐ ┌────────────────────────────────────────┐
+│ Google Ads Microservice (Go / Gin)     │ │ TikTok Ads Microservice (Go / Gin)     │
+│ • GAQL v25 Stream Query Engine         │ │ • Marketing API v1.3 REST Endpoints    │
+│ • 15-Minute Zero-Throttle Sync         │ │ • Async Workers (HTTP 202 Polling)     │
+│ • Symmetrical Impact Measurement Engine│ │ • Conflict-Handling Distributed Lock   │
+└───────────────────┬────────────────────┘ └───────────────────┬────────────────────┘
+                    │                                          │
+                    └────────────────────┬─────────────────────┘
+                                         ▼
+┌─────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ AI Automation & Decision Engine: Closed-Loop LLM Function Calling (1-Tap Mutation)                     │
+│ Guardrails: Deterministic Negative Keyword Validation • Zero-Sum Budget Redistribution                   │
+└────────────────────────────────────────┬────────────────────────────────────────────────────────────────┘
+                                         ▼
+┌─────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Central Persistence: PostgreSQL (JSONB Dynamic Metrics Telemetry & Audit Logs)                          │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────┘</div>
+
+      <!-- Key Engineering Achievements -->
+      <div class="section-title" style="margin-top: 8px;">
+        <h2>Key Engineering Solutions &amp; Validated Metrics</h2>
+      </div>
+
+      <div class="two-col">
+        <div class="card">
+          <h3 style="font-size: 10.5px; color: #0369a1; margin-bottom: 4px;">1. Closed-Loop AI &amp; Symmetrical Impact</h3>
+          <ul class="bullet-list">
+            <li><b>16.5% Wasted Spend Cut:</b> Formulated PostgreSQL JSONB before-vs-after comparison engine saving ~Rp 1M/week on initial test campaigns.</li>
+            <li><b>100% Irrelevant Traffic Eliminated:</b> Automatic negative keyword injection without requiring manual operator intervention.</li>
+            <li><b>Financial Risk Guardrails:</b> Hard-capped programmatic mutations ensuring zero runaway ad spend across connected accounts.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 style="font-size: 10.5px; color: #0369a1; margin-bottom: 4px;">2. Concurrency, Reliability &amp; Sync</h3>
+          <ul class="bullet-list">
+            <li><b>Dual Processing Modes:</b> Async HTTP 202 polling workers for bulk mutations vs. sync HTTP 200 for real-time reads with distributed locks.</li>
+            <li><b>Zero-Throttle Pipeline:</b> 15-minute timezone-resilient synchronization pipeline handling massive daily telemetry without hitting API quotas.</li>
+            <li><b>100% Test Coverage:</b> Thorough unit and integration test coverage across all critical payment and campaign dispatch pipelines.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="margin-top: 4px;">
+        <span class="badge badge-primary">Go (Golang)</span>
+        <span class="badge badge-primary">Gin Framework</span>
+        <span class="badge badge-primary">Google Ads API v25 (GAQL)</span>
+        <span class="badge badge-primary">TikTok Marketing API v1.3</span>
+        <span class="badge">PostgreSQL (JSONB)</span>
+        <span class="badge">Async HTTP 202</span>
+        <span class="badge">LLM Tool Calling</span>
+        <span class="badge">OAuth 2.0</span>
+      </div>
+    </div>
+
+    <div class="doc-footer">
+      <span>Prasetyo Edi Pamungkas · Technical Portfolio</span>
+      <span>Page 3 of 6</span>
+      <span>myportofolio-iota-red.vercel.app</span>
+    </div>
+  </div>
+
+  <!-- ==================== PAGE 4: CASE STUDY 2 (PT HINO MOTORS) ==================== -->
+  <div class="page">
+    <div class="page-content">
+      <div class="doc-header">
+        <span class="doc-title">Section 03 · Enterprise Deep-Dive Case Study 2</span>
+        <span class="doc-meta">ASP.NET Core v8 · SQL Server · DevExtreme · IMemoryCache</span>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+        <div>
+          <h2>Service Parts Sales Order System with Digital Multilevel Approval</h2>
+          <div class="subheading">PT Hino Motors Manufacturing Indonesia · August 2025 – February 2026 | Enterprise Internship &amp; Final Project</div>
+        </div>
+        <span class="badge badge-accent" style="font-size: 9px; padding: 4px 8px;">99.08% Latency Cut · 98.7% UAT</span>
+      </div>
+
+      <!-- Problem vs Solution Grid -->
+      <div class="two-col" style="margin-bottom: 8px;">
+        <div class="card" style="margin-bottom: 0;">
+          <h3 style="color: #b91c1c; font-size: 10px; margin-bottom: 3px;">The Engineering Challenge</h3>
+          <p style="font-size: 9px; color: #475569; line-height: 1.4;">
+            International service parts sales orders previously relied on manual physical paper routing across 11 stages and 3 management tiers. This caused drafting delays (20–30 mins/order), untracked order states, and 976ms analytical database queries on massive historical order catalogs.
+          </p>
+        </div>
+        <div class="card" style="margin-bottom: 0;">
+          <h3 style="color: #15803d; font-size: 10px; margin-bottom: 3px;">The Architectural Solution</h3>
+          <p style="font-size: 9px; color: #475569; line-height: 1.4;">
+            Architected a centralized ASP.NET Core v8 (MVC) enterprise system featuring a 2-tier RBAC approval state machine (Staff PIC → Dept Head → Div Head), automated master-data validation, and an IMemoryCache analytical layer with DevExtreme virtualized DataGrids.
+          </p>
+        </div>
+      </div>
+
+      <!-- Production Architecture Diagram -->
+      <div style="font-weight: 700; font-size: 9.5px; color: #0f172a; margin-top: 6px;">
+        Enterprise Workflow &amp; Caching Architecture Flow:
+      </div>
+      <div class="arch-box">
+┌─────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ International Sales Client (DevExtreme Virtualized DataGrid • Google Lighthouse 99/100)                │
+└───────────────────────────────────────────────────┬─────────────────────────────────────────────────────┘
+                                                    │ HTTPS / ASP.NET Core v8 MVC
+                                                    ▼
+┌─────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Web Application & Business Logic Layer                                                                  │
+│ • Master Data Auto-Validation ──► Slashed Drafting Time by ~90% (from 20–30 mins to &lt;3 mins)           │
+│ • In-Memory Caching (IMemoryCache) ──► Latency Slashed by 99.08% (from 976 ms to 9 ms)                 │
+└───────────────────────────┬─────────────────────────────────────────────────┬───────────────────────────┘
+                            │                                                 │
+                            ▼                                                 ▼
+┌───────────────────────────────────────────────────────┐ ┌───────────────────────────────────────────────┐
+│ 2-Tier Approval State Machine                         │ │ Enterprise Database Persistence Layer         │
+│ • Role-Based Access Control (Staff PIC / Dept / Div)  │ │ • Microsoft SQL Server (Optimized Indexing)   │
+│ • Rejection Audit Trail & Automated SMTP Alert Queue  │ │ • Strict Transactions & 0.00% Error Rate      │
+└───────────────────────────────────────────────────────┘ └───────────────────────────────────────────────┘</div>
+
+      <!-- Key Engineering Achievements -->
+      <div class="section-title" style="margin-top: 8px;">
+        <h2>Rigorous Performance Benchmarks &amp; Business Impact</h2>
+      </div>
+
+      <div class="two-col">
+        <div class="card">
+          <h3 style="font-size: 10.5px; color: #0369a1; margin-bottom: 4px;">1. Extreme Caching &amp; Performance Optimization</h3>
+          <ul class="bullet-list">
+            <li><b>99.08% Latency Slashed:</b> IMemoryCache analytical layer dropped query times from <b>976 ms to 9 ms</b>.</li>
+            <li><b>2,744% Throughput Boost:</b> Throughput surged from 14.5 req/s to <b>412 req/s</b> under load testing.</li>
+            <li><b>0.00% Error Rate:</b> Zero dropped packets or transaction deadlocks during peak concurrent stress tests.</li>
+            <li><b>Lighthouse 99/100:</b> FCP 0.58s, LCP 0.70s, and TBT &lt;70ms on data-dense virtualized grids.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 style="font-size: 10.5px; color: #0369a1; margin-bottom: 4px;">2. Business Process Automation (BPMN)</h3>
+          <ul class="bullet-list">
+            <li><b>54.5% Lead Time Reduction:</b> Operational stages streamlined from 11 manual physical steps to 5 digital stages.</li>
+            <li><b>~90% Drafting Time Cut:</b> Order input time dropped from <b>20–30 mins to under 3 mins</b> via automated validations.</li>
+            <li><b>98.7% UAT Acceptance:</b> Facilitated iterative User Acceptance Testing with division heads and operational leaders.</li>
+            <li><b>Audit Compliance:</b> Complete digital paper trail with automated SMTP email alerts and rejection notes.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="margin-top: 4px;">
+        <span class="badge badge-primary">ASP.NET Core v8</span>
+        <span class="badge badge-primary">C#</span>
+        <span class="badge badge-primary">SQL Server</span>
+        <span class="badge badge-primary">Entity Framework Core</span>
+        <span class="badge badge-accent">IMemoryCache</span>
+        <span class="badge">DevExtreme DataGrid</span>
+        <span class="badge">BPMN 2.0 / UML</span>
+        <span class="badge">Google Lighthouse 99/100</span>
+      </div>
+    </div>
+
+    <div class="doc-footer">
+      <span>Prasetyo Edi Pamungkas · Technical Portfolio</span>
+      <span>Page 4 of 6</span>
+      <span>myportofolio-iota-red.vercel.app</span>
+    </div>
+  </div>
+
+  <!-- ==================== PAGE 5: CASE STUDIES 3 & PROJECTS ==================== -->
+  <div class="page">
+    <div class="page-content">
+      <div class="doc-header">
+        <span class="doc-title">Section 04 · Featured Engineering Projects</span>
+        <span class="doc-meta">React · Next.js · Laravel · HealthTech · High-Traffic</span>
+      </div>
+
+      <!-- Project 1: CalMind -->
+      <div class="card" style="margin-bottom: 12px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+          <div>
+            <h2 style="font-size: 12.5px; margin-bottom: 2px;">CalMind — Mental Health Consultation &amp; Telehealth Platform</h2>
+            <div class="subheading">Alterra Academy Capstone Project · Team Leader &amp; Frontend Lead | 2024</div>
+          </div>
+          <span class="badge badge-accent">99.5% API Uptime</span>
+        </div>
+
+        <p style="font-size: 9.5px; color: #475569; margin: 4px 0 6px 0;">
+          <b>Challenge:</b> Unified telehealth access required fragmented services across multi-role appointment scheduling, professional doctor triage, automated preliminary screening, and real-time payment handling.
+        </p>
+
+        <ul class="bullet-list">
+          <li><b>Frontend Architecture:</b> Architected 3 distinct role-based portals (User, Doctor, Admin) using React.js and Zustand global state management with protected client-side route guards.</li>
+          <li><b>Secure Payment Gateway:</b> Integrated Midtrans Snap payment gateway with SHA-512 webhook signature verification ensuring strict transaction integrity.</li>
+          <li><b>AI Virtual Triage:</b> Integrated Google Gemini AI API to provide automated preliminary clinical triage guidance before doctor consultations.</li>
+          <li><b>99.5% Uptime:</b> Achieved 99.5% live evaluation API uptime during capstone defense.</li>
+        </ul>
+
+        <div style="margin-top: 6px;">
+          <span class="badge badge-primary">React.js</span>
+          <span class="badge">Tailwind CSS</span>
+          <span class="badge">Zustand</span>
+          <span class="badge">Midtrans (SHA-512)</span>
+          <span class="badge">Google Gemini AI</span>
+          <span class="badge">Go Backend</span>
+        </div>
+      </div>
+
+      <!-- Project 2: Senyumin (Denteksi) -->
+      <div class="card" style="margin-bottom: 12px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+          <div>
+            <h2 style="font-size: 12.5px; margin-bottom: 2px;">Senyumin (Denteksi) — AI Dental Health Screening Pipeline</h2>
+            <div class="subheading">Senyumin (PT Senyum Cerdas Indonesia) · Web Developer Intern | 2024 – 2025</div>
+          </div>
+          <span class="badge badge-accent">40% Payload Cut</span>
+        </div>
+
+        <p style="font-size: 9.5px; color: #475569; margin: 4px 0 6px 0;">
+          <b>Challenge:</b> Dental photo uploads from mobile field clinics had inconsistent aspect ratios and large uncompressed image payloads, degrading early dental disease detection accuracy and overloading AI inference servers.
+        </p>
+
+        <ul class="bullet-list">
+          <li><b>Client-Side Processing Pipeline:</b> Integrated interactive CropperJS pre-processing into a Laravel web platform, enforcing strict resolution standards and slashing uploaded image payloads by <b>40%</b> prior to AI cloud inference.</li>
+          <li><b>Concurrency &amp; Data Integrity:</b> Normalized MySQL relational structures and eliminated race conditions/duplicate submissions during concurrent field clinic screening using compound unique constraints and JWT authentication.</li>
+        </ul>
+
+        <div style="margin-top: 6px;">
+          <span class="badge badge-primary">Laravel</span>
+          <span class="badge">PHP</span>
+          <span class="badge">MySQL</span>
+          <span class="badge">CropperJS</span>
+          <span class="badge">RESTful API</span>
+          <span class="badge">Bootstrap 5</span>
+        </div>
+      </div>
+
+      <!-- Project 3: Gelex UGM -->
+      <div class="card" style="margin-bottom: 0;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+          <div>
+            <h2 style="font-size: 12.5px; margin-bottom: 2px;">Gelanggang Expo UGM 2023 Official Portal</h2>
+            <div class="subheading">Universitas Gadjah Mada Annual Event · Frontend Developer | 2023</div>
+          </div>
+          <span class="badge badge-accent">95+ Lighthouse · 0 CLS</span>
+        </div>
+
+        <p style="font-size: 9.5px; color: #475569; margin: 4px 0 6px 0;">
+          <b>Challenge:</b> Thousands of incoming university students required a responsive, low-latency mobile portal to explore student activity units, event timelines, and campus directories during peak live exhibition traffic.
+        </p>
+
+        <ul class="bullet-list">
+          <li><b>High-Concurrency Architecture:</b> Built a mobile-first Next.js web application utilizing Static Site Generation (SSG) to withstand sudden concurrency surges without server latency.</li>
+          <li><b>Flawless UX Performance:</b> Scored <b>95+ on Mobile Google Lighthouse</b> with <b>zero Cumulative Layout Shift (CLS)</b>.</li>
+        </ul>
+
+        <div style="margin-top: 6px;">
+          <span class="badge badge-primary">Next.js</span>
+          <span class="badge">Tailwind CSS</span>
+          <span class="badge">SSG</span>
+          <span class="badge">Vercel</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-footer">
+      <span>Prasetyo Edi Pamungkas · Technical Portfolio</span>
+      <span>Page 5 of 6</span>
+      <span>myportofolio-iota-red.vercel.app</span>
+    </div>
+  </div>
+
+  <!-- ==================== PAGE 6: HONORS, BNSP & CONTACT ==================== -->
+  <div class="page">
+    <div class="page-content">
+      <div class="doc-header">
+        <span class="doc-title">Section 05 · Honors, Verified Credentials &amp; Contact</span>
+        <span class="doc-meta">National Competitions · BNSP Licenses · Contact Channels</span>
+      </div>
+
+      <!-- National Honors & Competitions -->
+      <div class="section-title">
+        <h2>National Honors &amp; Awards</h2>
+        <span class="pill">Kemendikbudristek RI</span>
+      </div>
+
+      <div class="card" style="margin-bottom: 12px;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+          <div>
+            <h3 style="font-size: 11px;">🥇 Gold Medal Winner — Poster PKM-K (PIMNAS 36)</h3>
+            <div style="color: #475569; font-size: 9px;">Pekan Ilmiah Mahasiswa Nasional Ke-36 · Kemendikbudristek RI | 2023</div>
+          </div>
+          <span class="badge badge-accent">National Gold</span>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; margin-bottom: 6px; padding-top: 6px; border-top: 1px solid #f1f5f9;">
+          <div>
+            <h3 style="font-size: 11px;">🥈 Silver Medal Winner — Poster PKM-K (PIMNAS 37)</h3>
+            <div style="color: #475569; font-size: 9px;">Pekan Ilmiah Mahasiswa Nasional Ke-37 · Kemendikbudristek RI | 2024</div>
+          </div>
+          <span class="badge badge-accent">National Silver</span>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; padding-top: 6px; border-top: 1px solid #f1f5f9;">
+          <div>
+            <h3 style="font-size: 11px;">🥉 3rd Place Winner — National Website Design Competition</h3>
+            <div style="color: #475569; font-size: 9px;">National Website Design Competition · Universitas Sebelas Maret (UNS) | 2023</div>
+          </div>
+          <span class="badge">National 3rd Place</span>
+        </div>
+      </div>
+
+      <!-- Verified BNSP & Industry Certifications -->
+      <div class="section-title">
+        <h2>Verified Professional Certifications</h2>
+        <span class="pill">BNSP Indonesia</span>
+      </div>
+
+      <div class="two-col" style="margin-bottom: 12px;">
+        <div class="card" style="margin-bottom: 0;">
+          <h3 style="font-size: 10.5px; color: #0369a1;">Associate Data Engineer (ADE)</h3>
+          <div style="font-size: 9px; color: #475569; font-weight: 600;">Badan Nasional Sertifikasi Profesi (BNSP)</div>
+          <div style="font-size: 8.5px; color: #64748b; margin-top: 2px;">License Period: 2025 – 2028 · Verified</div>
+        </div>
+
+        <div class="card" style="margin-bottom: 0;">
+          <h3 style="font-size: 10.5px; color: #0369a1;">Junior Web Developer (JWD)</h3>
+          <div style="font-size: 9px; color: #475569; font-weight: 600;">Badan Nasional Sertifikasi Profesi (BNSP)</div>
+          <div style="font-size: 8.5px; color: #64748b; margin-top: 2px;">License Period: 2025 – 2028 · Verified</div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom: 14px;">
+        <div style="font-size: 9.5px; font-weight: 700; color: #0f172a; margin-bottom: 4px;">Additional Academy Certifications:</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 4px;">
+          <span class="badge">ReactJS Mastery — Alterra Academy (2024)</span>
+          <span class="badge">Fundamental Front-End Web — Dicoding</span>
+          <span class="badge">Pemrograman Web Pemula — Dicoding</span>
+          <span class="badge">Dasar JavaScript — Dicoding</span>
+          <span class="badge">Dasar Pemrograman Web — Dicoding</span>
+        </div>
+      </div>
+
+      <!-- Connect & Work Together with Clickable Redirect Links & Offline QR Code -->
+      <div class="card card-highlight" style="padding: 14px 16px;">
+        <h2 style="justify-content: center; font-size: 13.5px; margin-bottom: 3px; color: #091e42; text-align: center;">
+          Let's Build Scalable Enterprise Systems Together
+        </h2>
+        <p style="font-size: 9.5px; color: #475569; max-width: 520px; margin: 0 auto 10px auto; text-align: center;">
+          Whether you are exploring Full Stack Software Engineer roles, high-throughput microservice architectures, or enterprise workflow automation—I look forward to discussing high-impact opportunities.
+        </p>
+
+        <div style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 6px;">
+          <!-- Clickable Direct Channels with href -->
+          <div style="display: flex; flex-direction: column; gap: 5.5px;">
+            <a href="mailto:prasetyoedi451@gmail.com" class="contact-pill" style="background: #ffffff; font-weight: 700; color: #0369a1; text-decoration: none; border: 1px solid #cbd5e1;">
+              ✉️ prasetyoedi451@gmail.com
+            </a>
+            <a href="https://www.linkedin.com/in/prasetyo-edi-pamungkas-4426611b0/" target="_blank" class="contact-pill" style="background: #ffffff; font-weight: 700; color: #0369a1; text-decoration: none; border: 1px solid #cbd5e1;">
+              💼 linkedin.com/in/prasetyo-edi-pamungkas-4426611b0
+            </a>
+            <a href="https://github.com/prasetyoedi" target="_blank" class="contact-pill" style="background: #ffffff; font-weight: 700; color: #0369a1; text-decoration: none; border: 1px solid #cbd5e1;">
+              🐙 github.com/prasetyoedi
+            </a>
+            <a href="https://myportofolio-iota-red.vercel.app/" target="_blank" class="contact-pill" style="background: #ffffff; font-weight: 700; color: #0369a1; text-decoration: none; border: 1px solid #cbd5e1;">
+              🌐 myportofolio-iota-red.vercel.app
+            </a>
+          </div>
+
+          <!-- Offline QR Code for In-Person / Printed Scans -->
+          <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6px 10px; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);">
+            <img src="qr-portfolio.png" alt="Scan QR Code" style="width: 72px; height: 72px; display: block; border-radius: 4px;" />
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 7.5px; color: #0284c7; font-weight: 700; margin-top: 3px; text-transform: uppercase; letter-spacing: 0.04em;">
+              Scan for Live Web
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-footer">
+      <span>Prasetyo Edi Pamungkas · Technical Portfolio</span>
+      <span>Page 6 of 6</span>
+      <span>myportofolio-iota-red.vercel.app</span>
+    </div>
+  </div>
+
+</body>
+</html>

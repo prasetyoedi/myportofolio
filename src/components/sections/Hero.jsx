@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowDown } from 'lucide-react';
+import { ArrowDown, FileText } from 'lucide-react';
 import { data } from '../../data';
 
 export default function Hero() {
@@ -14,9 +14,9 @@ export default function Hero() {
     >
       {/* Sunlight Surface Glow */}
       <div
-        className="absolute -top-32 left-1/2 -translate-x-1/2 w-[720px] h-[360px] rounded-full blur-[120px] pointer-events-none opacity-30 dark:opacity-20"
+        className="absolute -top-32 left-1/2 -translate-x-1/2 w-[720px] h-[360px] rounded-full blur-[120px] pointer-events-none opacity-15 dark:opacity-20"
         style={{
-          background: 'radial-gradient(ellipse, #06b6d4, #14b8a6, transparent 70%)',
+          background: 'radial-gradient(ellipse, #38bdf8, #0284c7, transparent 70%)',
         }}
       />
 
@@ -71,7 +71,7 @@ export default function Hero() {
           className="mt-8 grid grid-cols-1 sm:grid-cols-3 max-w-3xl mx-auto gap-3 p-2.5 rounded-2xl ocean-card"
         >
           {/* 1. Academic Achievement */}
-          <div className="p-3.5 rounded-xl bg-slate-100/70 dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/[0.04] flex flex-col justify-center items-center text-center">
+          <div className="p-3.5 rounded-xl bg-slate-50/90 dark:bg-white/[0.02] border border-slate-200 dark:border-white/[0.04] flex flex-col justify-center items-center text-center">
             <span className="font-mono text-base sm:text-lg md:text-xl font-bold text-cyan-800 dark:text-cyan-300">
               3.85 / 4.00
             </span>
@@ -84,9 +84,9 @@ export default function Hero() {
           </div>
 
           {/* 2. Technical Expertise */}
-          <div className="p-3.5 rounded-xl bg-slate-100/70 dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/[0.04] flex flex-col justify-center items-center text-center">
+          <div className="p-3.5 rounded-xl bg-slate-50/90 dark:bg-white/[0.02] border border-slate-200 dark:border-white/[0.04] flex flex-col justify-center items-center text-center">
             <span className="font-mono text-xs sm:text-sm font-bold text-teal-800 dark:text-teal-300 leading-snug">
-              Go, ASP.NET Core, PHP, React, Next.js
+              Go · .NET · PHP · React · Next.js
             </span>
             <span className="text-xs sm:text-sm font-semibold text-slate-900 dark:text-slate-100 mt-1">
               Full Stack Technologies
@@ -97,7 +97,7 @@ export default function Hero() {
           </div>
 
           {/* 3. National Achievement */}
-          <div className="p-3.5 rounded-xl bg-slate-100/70 dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/[0.04] flex flex-col justify-center items-center text-center">
+          <div className="p-3.5 rounded-xl bg-slate-50/90 dark:bg-white/[0.02] border border-slate-200 dark:border-white/[0.04] flex flex-col justify-center items-center text-center">
             <span className="font-mono text-base sm:text-lg md:text-xl font-bold text-cyan-800 dark:text-cyan-300">
               2× PIMNAS
             </span>
@@ -123,6 +123,16 @@ export default function Hero() {
           </a>
           <a href="#contact" className="btn-ocean-secondary min-h-[44px]">
             <span>Get in Touch</span>
+          </a>
+          <a
+            href="/portfolio_pdf.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-ocean-secondary min-h-[44px] flex items-center gap-1.5"
+            title="Open Printable PDF Portfolio"
+          >
+            <FileText size={15} />
+            <span>PDF Portfolio</span>
           </a>
         </motion.div>
       </div>
